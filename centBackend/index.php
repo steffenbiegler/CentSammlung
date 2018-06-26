@@ -9,24 +9,34 @@
     
     switch ($step) {
         case 'countries':
-            echo json_encode(db_laender($zeiger));;
+            echo json_encode(db_laender($zeiger));
             break;        
         case 'combinations':
-            echo json_encode(db_kombinationen($zeiger));;
+            echo json_encode(db_kombinationen($zeiger));
             break;
         case 'cities':
-            echo json_encode(db_staedte($zeiger));;
+            echo json_encode(db_staedte($zeiger));
             break;
         case 'count':
-            echo json_encode(db_cents_gesamt($zeiger));;
+            echo json_encode(db_cents_gesamt($zeiger));
+            break;                    
+        case 'count_year':
+            echo json_encode(db_cents_jahre($zeiger));
+            break;     
+        case 'count_city':
+            echo json_encode(db_staedte_jahre($zeiger));
+            break; 
+        case 'count_country':
+            echo json_encode(db_laender_jahre($zeiger));
             break;
-            
+        case 'grow':
+            echo json_encode(db_monatssummen($zeiger));
+            break;
+        case 'ranking':
+            echo json_encode(db_ranking($zeiger));
+            break;       
         default:
-        $return = json_encode(db_laender($zeiger))."<br>";
-            $return.= json_encode(db_kombinationen($zeiger))."<br>";  
-            $return.= json_encode(db_staedte($zeiger))."<br>";  
-            $return.= json_encode(db_cents_gesamt($zeiger))."<br>";  
-            echo $return;
+        $return = "Cent-Backend antwortet";
             break;
     }
 

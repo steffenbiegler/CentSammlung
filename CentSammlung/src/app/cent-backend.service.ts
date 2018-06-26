@@ -26,4 +26,25 @@ export class CentBackendService {
   getCount(): Observable<any> {
     return this.http.get(this.baseUrl + 'count');
   }
+
+  getYearCount(): Observable<any> {
+    return this.http.get(this.baseUrl + 'count_year');
+  }
+
+  getGermanCityCount(): Observable<any> {
+    return this.http.get(this.baseUrl + 'count_city');
+  }
+
+  getEuropeanCount(): Observable<any> {
+    return this.http.get(this.baseUrl + 'count_country');
+  }
+
+  getMonthlyGrow(): Observable<any> {
+    return this.http.get(this.baseUrl + 'grow');
+  }
+
+  getRanking(): Observable<any> {
+    return this.http.get(this.baseUrl + 'ranking');
+  }
+
 }

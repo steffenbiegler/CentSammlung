@@ -392,17 +392,17 @@ function db_monatswerte($zeiger,$jahr="",$monat=""){
 	}
 }
 
-function db_ranking($zeiger)
+function db_ranking($zeiger, $limit="")
 {
 	if ($zeiger){
-		$sql = 'select land, stadt_lang, jahr, sum(anzahl) as anz'
+		$sql = 'select sum(anzahl) as anz, jahr, land, stadt_lang'
 			. ' from tbl_cent'
 			. ' left join tbl_kombination using(idkomb)'
 			. ' left join tbl_stadt using(idstadt)'
 			. ' left join tbl_land using(idland)'
 			. ' group by land, stadt_lang, jahr'
-			. ' order by anz DESC'
-			. ' limit 0,30'; 
+			. ' order by anz DESC';
+			if ($limit != "") $sql.=' limit 0,'.$limit; 
 		$result= mysqli_query($zeiger, $sql);	
 		while($row = mysqli_fetch_array($result, MYSQLI_ASSOC))
 			{
