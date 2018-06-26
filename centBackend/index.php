@@ -8,12 +8,25 @@
     $zeiger = db_verbinden();
     
     switch ($step) {
-        case 'land':
-            echo $step;
+        case 'countries':
+            echo json_encode(db_laender($zeiger));;
+            break;        
+        case 'combinations':
+            echo json_encode(db_kombinationen($zeiger));;
             break;
-        
+        case 'cities':
+            echo json_encode(db_staedte($zeiger));;
+            break;
+        case 'count':
+            echo json_encode(db_cents_gesamt($zeiger));;
+            break;
+            
         default:
-            echo json_encode(db_laender($zeiger));
+        $return = json_encode(db_laender($zeiger))."<br>";
+            $return.= json_encode(db_kombinationen($zeiger))."<br>";  
+            $return.= json_encode(db_staedte($zeiger))."<br>";  
+            $return.= json_encode(db_cents_gesamt($zeiger))."<br>";  
+            echo $return;
             break;
     }
 

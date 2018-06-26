@@ -1,7 +1,7 @@
 <?php
 
 
-$step     		= post_get_session_pruefen("step");
+$step  = post_get_session_pruefen("step");
 
 function post_get_session_pruefen($variable, $md5 = false, $session = true, $speichern = true){
 	$rueckgabe = "";

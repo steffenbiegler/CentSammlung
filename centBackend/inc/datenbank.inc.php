@@ -1,64 +1,22 @@
 <?php
-/*
-----------------------------------------------------------------------------------------------------
-Name....................:datenbank.inc.php
-Projekt.................:newCent
-Autoren.................:Steffen Biegler, Juliane Henning
-Erstellung..............:21.02.2012
-Modifizierungen.........:
-Funktion................:regelt die Datenbankzugriffe & -abfragen
-----------------------------------------------------------------------------------------------------
-*/
-
-/*
-----------------------------------------------------------------------------------------------------
-Name....................:db_verbinden
-Projekt.................:newCent
-Autor...................:Steffen Biegler
-Erstellung..............:19.07.2011
-Modifizierungen.........:21.02.2012
-Funktion................:stellt Verbindung zur Datenbank her
-----------------------------------------------------------------------------------------------------
-*/
-
 
 function db_verbinden(){
 	$zeiger =	@mysqli_connect(K_DB_HOST,K_USER,K_PW,K_DB);				
 	if( @mysqli_connect_errno()) {
 			$error = @mysqli_connect_error();
-			$zeiger = FALSE;
-			//echo "<h1>Verbindung zur Datenbank fehlgeschlagen!</h1>";						
+			$zeiger = FALSE;					
 	}		
 	mysqli_set_charset($zeiger, "utf8");
 	return $zeiger;	
 }
 
-/*
-----------------------------------------------------------------------------------------------------
-Name....................:db_trennen
-Projekt.................:newCent
-Autor...................:Steffen Biegler
-Erstellung..............:19.07.2011
-Modifizierungen.........:
-Funktion................:schließt Verbindung zur Datenbank
-----------------------------------------------------------------------------------------------------
-*/
 function db_trennen($zeiger){
 	if ($zeiger){
 		mysqli_close($zeiger);
 	}
 }
 
-/*
-----------------------------------------------------------------------------------------------------
-Name....................:db_cent_hinzufuegen
-Projekt.................:newCent
-Autoren.................:Steffen Biegler
-Erstellung..............:21.02.2012
-Modifizierungen.........:
-Funktion................:trägt cents ein
-----------------------------------------------------------------------------------------------------
-*/
+
 function db_cent_hinzufuegen($zeiger, $anzahl, $idkomb, $datum =""){	
 	if ($zeiger){
 		if ($datum == "") $datum = date("Y-m-d H:i:s");
@@ -68,16 +26,6 @@ function db_cent_hinzufuegen($zeiger, $anzahl, $idkomb, $datum =""){
 	}
 }
 
-/*
-----------------------------------------------------------------------------------------------------
-Name....................:db_kombinationen
-Projekt.................:newCent
-Autoren.................:Steffen Biegler
-Erstellung..............:21.02.2012
-Modifizierungen.........:
-Funktion................:gibt alle kombinationen eines landes zurück
-----------------------------------------------------------------------------------------------------
-*/
 function db_kombinationen($zeiger, $landid = "", $jahr ="", $stadtid = "" ){	
 	if ($zeiger){
 		if ($jahr != "")
@@ -100,22 +48,12 @@ function db_kombinationen($zeiger, $landid = "", $jahr ="", $stadtid = "" ){
 	}
 }
 	
-	
-	/*
-----------------------------------------------------------------------------------------------------
-Name....................:db_kombinationen
-Projekt.................:newCent
-Autoren.................:Steffen Biegler
-Erstellung..............:21.02.2012
-Modifizierungen.........:
-Funktion................:
-----------------------------------------------------------------------------------------------------
-*/
+
 function db_kombinationenByID($zeiger, $kombid){	
 	if ($zeiger){
 		$sql = 'SELECT * FROM `tbl_kombination` LEFT JOIN `tbl_land` USING(IDland) LEFT JOIN `tbl_stadt` USING(IDstadt)  WHERE `tbl_kombination`.`IDkomb` = '.$kombid.'  ORDER BY `land` ASC, `stadt_kurz` ASC, `jahr` DESC'; 
 		$result= mysqli_query($zeiger, $sql);	
-		if ($result){ // Falls Datensatz vorhanden 
+		if ($result){ 
 			while($row = mysqli_fetch_array($result, MYSQLI_ASSOC))
 				{
 					$a_komb[]= $row;
@@ -125,21 +63,11 @@ function db_kombinationenByID($zeiger, $kombid){
 	return $a_komb;	
 }
 
-/*
-----------------------------------------------------------------------------------------------------
-Name....................:db_dt_kombinationen
-Projekt.................:newCent
-Autoren.................:Steffen Biegler
-Erstellung..............:30.12.2015
-Modifizierungen.........:
-Funktion................:gibt alle deutschen Kombination zurück
-----------------------------------------------------------------------------------------------------
-*/
 function db_dt_kombinationen($zeiger){	
 	if ($zeiger){
 		$sql = 'SELECT IDkomb ,jahr,stadt_lang,stadt_kurz,land FROM `tbl_kombination` LEFT JOIN `tbl_land` USING(IDland) LEFT JOIN `tbl_stadt`USING(`IDstadt`) WHERE `tbl_kombination`.`IDland` = 2  ORDER BY  `jahr` ASC,`stadt_kurz` ASC;';
 		$result= mysqli_query($zeiger, $sql);	
-		if ($result){ // Falls Datensatz vorhanden 
+		if ($result){ 
 			while($row = mysqli_fetch_array($result, MYSQLI_ASSOC))
 				{
 					$a_komb[]= $row;
@@ -149,22 +77,12 @@ function db_dt_kombinationen($zeiger){
 	}
 }
 
-/*
-----------------------------------------------------------------------------------------------------
-Name....................:db_check_kombination
-Projekt.................:newCent
-Autoren.................:Steffen Biegler
-Erstellung..............:03.04.2013
-Modifizierungen.........:
-Funktion................:überprüft ob es die übergebene Kombination gibt
-----------------------------------------------------------------------------------------------------
-*/
 function db_check_kombination($zeiger, $land, $jahr ){	
 	if ($zeiger){
 		$sql = 'SELECT * FROM `tbl_kombination` LEFT JOIN `tbl_land` USING ( `IDland` ) WHERE `jahr` = '.$jahr.' AND `land` = "'.$land.'"'; 
 		$result= mysqli_query($zeiger, $sql);	
 		$ok = false;
-		if ($result){ // Falls Datensatz vorhanden 
+		if ($result){ 
 			$a_komb = mysqli_fetch_row($result);
 			if (count($a_komb) > 0) $ok = true;
 		}
@@ -173,16 +91,6 @@ function db_check_kombination($zeiger, $land, $jahr ){
 }
 
 
-/*
-----------------------------------------------------------------------------------------------------
-Name....................:db_neues_land
-Projekt.................:newCent
-Autoren.................:Steffen Biegler
-Erstellung..............:21.02.2012
-Modifizierungen.........:
-Funktion................:erstellt ein neues Land
-----------------------------------------------------------------------------------------------------
-*/
 function db_neues_land($zeiger, $land){	
 	if ($zeiger){
 		$sql = 'INSERT INTO `'.K_DB.'`.`tbl_land` (`land`) VALUES (\''.$land.'\');'; 
@@ -194,16 +102,6 @@ function db_neues_land($zeiger, $land){
 	}
 }
 
-/*
-----------------------------------------------------------------------------------------------------
-Name....................:db_neue_kombination
-Projekt.................:newCent
-Autoren.................:Steffen Biegler
-Erstellung..............:21.02.2012
-Modifizierungen.........:
-Funktion................:erstellt eine neue Prägekombination
-----------------------------------------------------------------------------------------------------
-*/
 function db_neue_kombination($zeiger, $landid, $jahr){	
 		if ($zeiger){
 		$ok = TRUE;
@@ -238,22 +136,11 @@ function db_neue_kombination($zeiger, $landid, $jahr){
 	}
 }
 
-
-/*
-----------------------------------------------------------------------------------------------------
-Name....................:db_loesche_kombination
-Projekt.................:newCent
-Autoren.................:Steffen Biegler
-Erstellung..............:21.02.2012
-Modifizierungen.........:
-Funktion................:löscht eine Prägekombination
-----------------------------------------------------------------------------------------------------
-*/
 function db_loesche_kombination($zeiger, $kombid){	
 	if ($zeiger){
 		$sql = 'SELECT * FROM `tbl_cent` where `IDkomb` = '.$kombid; 
 		$result= mysqli_query($zeiger, $sql);	
-		if (!$result || mysqli_num_rows($result) == 0){ // Falls kein Datensatz vorhanden ist
+		if (!$result || mysqli_num_rows($result) == 0){
 			$sql = 'DELETE FROM `tbl_kombination` WHERE `tbl_kombination`.`IDkomb` = '.$kombid.' LIMIT 1'; 
 			$result= mysqli_query($zeiger, $sql);	
 			return TRUE;
@@ -264,16 +151,6 @@ function db_loesche_kombination($zeiger, $kombid){
 	}
 }
 
-/*
-----------------------------------------------------------------------------------------------------
-Name....................:db_letzteAtualisierung
-Projekt.................:newCent
-Autoren.................:Steffen Biegler
-Erstellung..............:22.02.2012
-Modifizierungen.........:
-Funktion................:gibt an wann das letzte mal an der Dantenbank gearbeitet wurde
-----------------------------------------------------------------------------------------------------
-*/
 function db_letzteAtualisierung($zeiger){	
 	if ($zeiger){
 		$sql = 'SELECT `datum` FROM `tbl_cent` ORDER BY `tbl_cent`.`datum` DESC Limit 0,1'; 
@@ -284,18 +161,6 @@ function db_letzteAtualisierung($zeiger){
 }
 
 
-
-
-/*
-----------------------------------------------------------------------------------------------------
-Name....................:db_laender
-Projekt.................:newCent
-Autoren.................:Steffen Biegler
-Erstellung..............:21.02.2012
-Modifizierungen.........:
-Funktion................:gibt die Länder zurück
-----------------------------------------------------------------------------------------------------
-*/
 function db_laender($zeiger){	
 	if ($zeiger){
 		$sql = 'SELECT * FROM `tbl_land` ORDER BY `IDland` ASC'; 	
@@ -308,17 +173,6 @@ function db_laender($zeiger){
 	}
 }
 
-
-/*
-----------------------------------------------------------------------------------------------------
-Name....................:db_staedte
-Projekt.................:newCent
-Autoren.................:Steffen Biegler
-Erstellung..............:21.02.2012
-Modifizierungen.........:
-Funktion................:gibt die Städte zurück
-----------------------------------------------------------------------------------------------------
-*/
 function db_staedte($zeiger){	
 	if ($zeiger){
 		$sql = 'SELECT * FROM `tbl_stadt` ORDER BY `stadt_kurz` ASC'; 	
@@ -331,37 +185,15 @@ function db_staedte($zeiger){
 	}
 }
 
-
-/*
-----------------------------------------------------------------------------------------------------
-Name....................:db_cents_gesamt
-Projekt.................:newCent
-Autoren.................:Steffen Biegler
-Erstellung..............:21.02.2012
-Modifizierungen.........:
-Funktion................:gibt die gesamtzahl an Cents zurück
-----------------------------------------------------------------------------------------------------
-*/
 function db_cents_gesamt($zeiger, $datum = ""){	
 	if ($zeiger){
 		if ($datum == "") $datum = date("Y-m-d H:i:s");
-		$sql = 'SELECT SUM(`anzahl`) AS gesamt FROM `tbl_cent` where `datum` <= \''.$datum.'\'';
+		$sql = 'SELECT SUM(`anzahl`) AS gesamt, MAX(`datum`) AS datum FROM `tbl_cent` where `datum` <= \''.$datum.'\'';		
 		$result= mysqli_query($zeiger, $sql);	
-		$row = mysqli_fetch_array($result, MYSQLI_ASSOC);
-		return $row["gesamt"];
+		return  mysqli_fetch_array($result, MYSQLI_ASSOC);
 	}	
 }
 
-/*
-----------------------------------------------------------------------------------------------------
-Name....................:db_cents_jahre
-Projekt.................:newCent
-Autoren.................:Juliane Henning
-Erstellung..............:21.02.2012
-Modifizierungen.........:
-Funktion................:gibt alle Jahre mit zugehöriger Anzahl Cents zurück
-----------------------------------------------------------------------------------------------------
-*/
 function db_cents_jahre($zeiger)
 {
 	if ($zeiger){	
@@ -371,20 +203,10 @@ function db_cents_jahre($zeiger)
 		{
 			$a_cents_jahr[]= $row;
 		}
-		db_trennen($zeiger);
+		
 		return $a_cents_jahr;
 	}
 }
-/*
-----------------------------------------------------------------------------------------------------
-Name....................:db_staedte_jahre
-Projekt.................:newCent
-Autoren.................:Juliane Henning
-Erstellung..............:22.02.2012
-Modifizierungen.........:
-Funktion................:gibt die Daten für die Deutschen Prägekombinationen zurück
-----------------------------------------------------------------------------------------------------
-*/
 
 function db_staedte_jahre($zeiger)
 {
@@ -400,21 +222,11 @@ function db_staedte_jahre($zeiger)
 		{
 			$a_staedte_jahre[]= $row;
 		}
-		db_trennen($zeiger);
+		
 		return $a_staedte_jahre;
 	}
 }
 
-/*
-----------------------------------------------------------------------------------------------------
-Name....................:db_laender_jahre
-Projekt.................:newCent
-Autoren.................:Juliane Henning
-Erstellung..............:22.02.2012
-Modifizierungen.........:
-Funktion................:gibt die Daten für die europäischen Prägekombinationen zurück
-----------------------------------------------------------------------------------------------------
-*/
 function db_laender_jahre($zeiger)
 {
 	if ($zeiger){
@@ -429,22 +241,12 @@ function db_laender_jahre($zeiger)
 		{
 			$a_laender_jahre[]= $row;
 		}
-		db_trennen($zeiger);
+		
 		return $a_laender_jahre;
 		
 	}
 }
 
-/*
-----------------------------------------------------------------------------------------------------
-Name....................:db_monatssummen
-Projekt.................:newCent
-Autoren.................:Juliane Henning
-Erstellung..............:23.02.2012
-Modifizierungen.........:
-Funktion................:gibt die Daten für die Zuwachsstatistik zurück
-----------------------------------------------------------------------------------------------------
-*/
 function db_monatssummen($zeiger)
 {
 	if ($zeiger){
@@ -454,21 +256,11 @@ function db_monatssummen($zeiger)
 		{
 			$a_monatssumme[]= $row;
 		}
-		db_trennen($zeiger);
-		//print_r($a_monatssumme);
+		
 		return $a_monatssumme;
 	}
 }
-/*
-----------------------------------------------------------------------------------------------------
-Name....................:db_monatssummen_dt
-Projekt.................:newCent
-Autoren.................:Juliane Henning
-Erstellung..............:23.02.2012
-Modifizierungen.........:
-Funktion................:gibt die Daten für die Zuwachsstatistik zurück
-----------------------------------------------------------------------------------------------------
-*/
+
 function db_monatssummen_dt($zeiger)
 {
 	if ($zeiger){
@@ -482,22 +274,11 @@ function db_monatssummen_dt($zeiger)
 		{
 			$a_monatssumme_dt[]= $row;
 		}
-		db_trennen($zeiger);
-		//print_r($a_monatssumme);
+		
 		return $a_monatssumme_dt;
 	}
 }
 
-/*
-----------------------------------------------------------------------------------------------------
-Name....................:db_staettesummen
-Projekt.................:newCent
-Autoren.................:Juliane Henning
-Erstellung..............:24.02.2012
-Modifizierungen.........:
-Funktion................:gibt die Daten für die Stätte-Statistik zurück
-----------------------------------------------------------------------------------------------------
-*/
 function db_staettesummen($zeiger)
 {
 	if ($zeiger){
@@ -515,22 +296,13 @@ function db_staettesummen($zeiger)
 		{
 			$a_staettesumme[]= $row;
 		}
-		db_trennen($zeiger);
+		
 		
 		return $a_staettesumme;      
 	}
 }
 
-/*
-----------------------------------------------------------------------------------------------------
-Name....................:db_staettesummen
-Projekt.................:newCent
-Autoren.................:Steffen Biegler
-Erstellung..............:24.02.2012
-Modifizierungen.........:
-Funktion................:gibt die gesamte History zurück
-----------------------------------------------------------------------------------------------------
-*/
+
 function db_history($zeiger, $jahr = "", $monat = ""){
 	if ($zeiger){
 		$a_history = null;
@@ -547,16 +319,6 @@ function db_history($zeiger, $jahr = "", $monat = ""){
 }
 
 
-/*
-----------------------------------------------------------------------------------------------------
-Name....................:db_monat
-Projekt.................:newCent
-Autoren.................:Steffen Biegler
-Erstellung..............:27.02.2012
-Modifizierungen.........:
-Funktion................:gibt alle monate, in denen Cents eingetragen wurden, zurück
-----------------------------------------------------------------------------------------------------
-*/
 function db_monat($zeiger, $sort='DESC'){	
 	if ($zeiger){
 		$a_monat = null;
@@ -566,25 +328,10 @@ function db_monat($zeiger, $sort='DESC'){
 		{
 				$a_monat[]= $row;			
 		}
-		/*if ($a_monat[0]["monatnr"] < intval(date("m"))){		
-			$a_monat[-1]["monatnr"] = intval(date("m"));
-			$a_monat[-1]["jahr"] = date("Y");
-			ksort($a_monat);
-		} */
 		return $a_monat;
 	}
 }
 
-/*
-----------------------------------------------------------------------------------------------------
-Name....................:db_zuwachs
-Projekt.................:newCent
-Autoren.................:Juliane Henning
-Erstellung..............:27.02.2012
-Modifizierungen.........:
-Funktion................:gibt die Daten für die städteweise Zuwachsstatistik zurück
-----------------------------------------------------------------------------------------------------
-*/
 function db_zuwachs($zeiger,$stadt_kurz, $jahr, $monat)
 {
 	if ($zeiger){
@@ -606,16 +353,7 @@ function db_zuwachs($zeiger,$stadt_kurz, $jahr, $monat)
 	}
 }
 
-/*
-----------------------------------------------------------------------------------------------------
-Name....................:db_praegejahre_dt
-Projekt.................:newCent
-Autoren.................:Juliane Henning
-Erstellung..............:27.02.2012
-Modifizierungen.........:
-Funktion................:gibt die Prägejahre Deutschlands zurück (ANDERE VERWENDUNG UNMÖGLICH!!!!!!) :P
-----------------------------------------------------------------------------------------------------
-*/
+
 function db_praegejahre_dt($zeiger){	
 	if ($zeiger){
 		$sql = 'SELECT jahr FROM `tbl_kombination` '
@@ -628,21 +366,12 @@ function db_praegejahre_dt($zeiger){
 			{
 				$a_jahr[]= $row["jahr"];
 			}
-		db_trennen($zeiger);
+		
 		return $a_jahr;
 	}
 }
 
-/*
-----------------------------------------------------------------------------------------------------
-Name....................:db_monatswerte
-Projekt.................:newCent
-Autoren.................:Steffen Biegler
-Erstellung..............:27.02.2012
-Modifizierungen.........:
-Funktion................:gibt die Zahlen für die Monatsabrechnung zurück
-----------------------------------------------------------------------------------------------------
-*/
+
 function db_monatswerte($zeiger,$jahr="",$monat=""){
 		if ($zeiger){
 		$a_monat = null;
@@ -662,16 +391,7 @@ function db_monatswerte($zeiger,$jahr="",$monat=""){
 		return $a_monat;     		
 	}
 }
-/*
-----------------------------------------------------------------------------------------------------
-Name....................:db_ranking
-Projekt.................:newCent
-Autoren.................:Juliane Henning
-Erstellung..............:28.02.2012
-Modifizierungen.........:
-Funktion................:gibt die Zahlen für das Ranking zurück
-----------------------------------------------------------------------------------------------------
-*/
+
 function db_ranking($zeiger)
 {
 	if ($zeiger){
