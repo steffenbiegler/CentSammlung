@@ -1,4 +1,19 @@
 /* You can add global styles to this file, and also import other style files */
 body{
-    background-color: #FADCB9;
+    background-color: #C4835E;
+    font-family: "Constantia";
+}
+
+.hintergrund_hell{
+	background-color:#FADCB9;
+	color:#684432;
+}
+
+.hintergrund_dunkel{	
+	background-color:#C4835E;
+	color:black;
+}
+
+.anklickbar{
+	cursor:pointer;
 }

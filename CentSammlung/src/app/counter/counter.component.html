@@ -1,4 +1,5 @@
-<div *ngIf='centCount'>
-    {{centCount.gesamt}}
-    {{centCount.datum | date }}
+<div *ngIf='centCount' id='counterblock'>
+   <span class='counter'>0</span>
+   <span class='counter' *ngFor="let digit of centCount.digits">{{digit}}</span><br>
+    {{centCount.datum | date:'dd.MM.yyyy' }}
 </div>
