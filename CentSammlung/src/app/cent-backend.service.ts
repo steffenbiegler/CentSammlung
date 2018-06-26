@@ -6,11 +6,24 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class CentBackendService {
+  private baseUrl = 'http://127.0.0.1:80/centBackend/?step=';
 
   constructor(private http: HttpClient) { }
 
 
-  connectionTest(): Observable<any> {
-    return this.http.get('http://localhost/centBackend/');
+  getCombinations(): Observable<any> {
+    return this.http.get(this.baseUrl + 'combinations');
+  }
+
+  getCountries(): Observable<any> {
+    return this.http.get(this.baseUrl + 'countries');
+  }
+
+  getCitys(): Observable<any> {
+    return this.http.get(this.baseUrl + 'cities');
+  }
+
+  getCount(): Observable<any> {
+    return this.http.get(this.baseUrl + 'count');
   }
 }

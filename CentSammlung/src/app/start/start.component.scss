@@ -1,0 +1,13 @@
+#linkBlock{
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+
+.flexContainer{
+    flex-basis: 120px;    
+    display: flex;
+    justify-content: space-evenly;
+}
