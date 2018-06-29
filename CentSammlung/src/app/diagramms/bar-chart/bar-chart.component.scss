@@ -1,13 +1,13 @@
 .chart {
   width: 100%;
-  height: 500px;
+  height: 100%;
 }
 
 .chart .axis path,
 .chart .axis line {
-  stroke: #999;
+  stroke: black;
 }
 
 .chart .axis text {
-  fill: #999;
+  fill: black;
 }

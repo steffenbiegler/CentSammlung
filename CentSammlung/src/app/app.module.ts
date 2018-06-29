@@ -1,9 +1,11 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 
 import { HttpClientModule } from '@angular/common/http';
 
 import { RouterModule, Routes} from '@angular/router';
+import { MaterialModule } from './MaterialModule/material.module';
 
 import { AppComponent } from './app.component';
 import { StartComponent } from './start/start.component';
@@ -49,7 +51,9 @@ const appRoutes: Routes = [  {path: '', component: StartComponent },
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     HttpClientModule,
+    MaterialModule,
     RouterModule.forRoot(appRoutes)
   ],
   providers: [],

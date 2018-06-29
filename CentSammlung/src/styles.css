@@ -2,6 +2,7 @@
 body{
     background-color: #C4835E;
     font-family: "Constantia";
+    margin: 0px;
 }
 
 .hintergrund_hell{
@@ -9,7 +10,7 @@ body{
 	color:#684432;
 }
 
-.hintergrund_dunkel{	
+.hintergrund_dunkel{
 	background-color:#C4835E;
 	color:black;
 }

@@ -13,10 +13,10 @@ import * as d3 from 'd3';
 export class BarChartComponent implements OnInit, OnChanges {
   @ViewChild('chart') private chartContainer: ElementRef;
   @Input() private data: Array<any>;
-  @Input() private horizontalOrientation? = true;
-  @Input() private fromColor? = 'red';
-  @Input() private toColor? = 'blue';
-  private margin: any = { top: 20, bottom: 20, left: 20, right: 20};
+  @Input() private horizontalOrientation ? = true;
+  @Input() private fromColor ? = 'red';
+  @Input() private toColor ? = 'blue';
+  @Input() private margin ?: any = { top: 20, bottom: 20, left: 20, right: 20};
   private chart: any;
   private width: number;
   private height: number;
@@ -68,8 +68,7 @@ export class BarChartComponent implements OnInit, OnChanges {
         .attr('class', 'axis axis-y')
         .attr('transform', `translate(${this.margin.left}, ${this.margin.top})`)
         .call(d3.axisLeft(this.yScale));
-    }
-    else{
+    } else {
       const xDomain = [0, d3.max(this.data, d => d[1])];
       const yDomain = this.data.map(d => d[0]);
       this.yScale = d3.scaleBand().padding(0.1).domain(yDomain).rangeRound([0, this.height]);
@@ -116,8 +115,7 @@ export class BarChartComponent implements OnInit, OnChanges {
         .transition()
         .delay((d, i) => i * 10)
         .attr('y', d => this.yScale(d[1]))
-        .attr('height', d => this.height - this.yScale(d[1])); }
-    else{
+        .attr('height', d => this.height - this.yScale(d[1])); } else {
       this.xScale.domain([0, d3.max(this.data, d => d[1])]);
       this.yScale.domain(this.data.map(d => d[0]));
       this.colors.domain([0, this.data.length]);

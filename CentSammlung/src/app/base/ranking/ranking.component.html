@@ -1,1 +1,5 @@
-{{data}}
+<button (click) = 'this.showBars = !this.showBars;'></button>
+<div class='drawingArea'>
+  <app-bar-chart *ngIf="data && showBars" [data]="data" [horizontalOrientation]=false [margin]="{ top: 20, bottom: 10, left: 80, right: 10}"></app-bar-chart>
+  <app-bubble-chart *ngIf="data && !showBars" [data]="data" ></app-bubble-chart>
+</div>

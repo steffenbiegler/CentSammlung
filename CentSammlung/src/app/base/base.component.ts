@@ -7,7 +7,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./base.component.scss']
 })
 export class BaseComponent implements OnInit {
-
+  events: string[] = [];
+  opened: boolean;
   constructor() { }
 
   ngOnInit() {

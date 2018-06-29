@@ -4,7 +4,7 @@ import * as d3 from 'd3';
 @Component({
   selector: 'app-bubble-chart',
   templateUrl: './bubble-chart.component.html',
-  styleUrls: ['./bubble-chart.component.css']
+  styleUrls: ['./bubble-chart.component.scss']
 })
 
 export class BubbleChartComponent implements OnInit {
@@ -12,7 +12,7 @@ export class BubbleChartComponent implements OnInit {
   @Input() private data: Array < any > ;
   private colors;
   private columnwidht = 20;
-  private margin: any = { top: 20, bottom: 20, left: 20, right: 20};
+  private margin: any = { top: 20, bottom: 20, left: 40, right: 20};
   constructor() {}
 
   ngOnInit() {
