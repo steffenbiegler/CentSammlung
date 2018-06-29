@@ -17,18 +17,14 @@ export class BubbleChartComponent implements OnInit {
 
   ngOnInit() {
     this.createChart();
-    if (this.data) {
-      this.updateChart();
-    }
   }
 
   createChart() {
     this.colors = d3.scaleOrdinal(
-      ['Blue', 'Red', 'Yellow', 'Green', 'Orange', 'Purple', 'White', 'Brown', 'Black', 'Grey',
+      [ 'Yellow', 'White', 'Red', 'Green', 'Orange', 'Salmon', 'Blue',  'Brown', 'Black', 'Grey',
        'CornflowerBlue',  'Crimson', 'GoldenRod ', 'Chartreuse', 'Fuchsia', 'Khaki', 'Chocolate', 'MidnightBlue', 'LightGrey',
-       'Aqua', 'OrangeRed', 'Lime', 'MediumSeaGreen', 'Salmon', 'DeepPink', 'Beige', 'BurlyWood', 'DarkSlateGrey', 'DimGrey']);
+       'Aqua', 'OrangeRed', 'Lime', 'MediumSeaGreen', 'Purple', 'DeepPink', 'Beige', 'BurlyWood', 'DarkSlateGrey', 'DimGrey']);
     const element = this.chartContainer.nativeElement;
-    const reverseOffset = d3.max(this.data, d => d[1] / 20 + d[1] / 300) + this.margin.top;
     const circle = d3.select(element).append('svg')
       .attr('width', element.offsetWidth)
       .attr('height', element.offsetHeight)
@@ -43,30 +39,17 @@ export class BubbleChartComponent implements OnInit {
       .attr('stroke', '#333')
       .attr('transform', (data, index) => {
         const offsetX =  this.margin.left;
-        const offsetY =  reverseOffset;
+        const offsetY =  this.margin.top;
         return `translate(${offsetX}, ${offsetY})`;
       });
       bubble.transition()
-      .delay((d, i) => i * 100)
+      .delay((d, i) => i * 20)
       .attr('transform', (data, index) => {
-        const offsetX = ((data[2] - 1999) * (10 + this.columnwidht)  + data[1] / 300) + this.margin.left;
-        const offsetY =  reverseOffset - data[1] / 20 ;
+        const offsetX = ((data[2] - 1995) * (10 + this.columnwidht)  + data[1] / 300) + this.margin.left;
+        const offsetY = 2 * this.margin.top + data[1] / 3 ;
         return `translate(${offsetX}, ${offsetY})`;
       })
-      .attr('r', data => (data[1] / 250));
+      .attr('r', data => (data[1] / 25));
       bubble.append('title').text((d) => d[0] + ' ' + d[2] + ':' + d[1]);
-
-    /*circle.append('text')
-    .text((d) => d[0] + ' ' + d[2])
-    .attr('font-size', (data) => data[1])
-    .attr('transform', (data, index) => {
-      const offsetX = (data[2] - 1999 + this.columnwidht) * 15 - 100 - (data[1] * 2);
-      const offsetY = data[1] * 10;
-      return `translate(${offsetX}, ${offsetY})`;
-    });*/
   }
-
-  updateChart() {}
-
-
 }

@@ -14,16 +14,20 @@ import {
 })
 export class RankingComponent implements OnInit {
   data;
-  showBars = true;
   constructor(private centService: CentBackendService) {}
 
   ngOnInit() {
-    this.generateRadomData();
+    this.recieveData();
   }
 
   recieveData() {
      this.centService.getRanking().subscribe((data) => {
-      this.data = data;
+      this.data = [];
+      for (let index = 0; index < data.length; index++) {
+        this.data.push([`${data[index].stadt_lang ? data[index].stadt_lang : data[index].land}`, parseInt(data[index].anz, 10),
+        parseInt(data[index].jahr, 10)]);
+      }
+
     });
   }
 
@@ -35,7 +39,8 @@ export class RankingComponent implements OnInit {
     for (let i = 0; i < (80 + Math.floor(Math.random() * 30)); i++) {
       this.data.push([
         `${cities[Math.floor(Math.random() * cities.length)]}`,
-         Math.floor(Math.random() * 5000), 1999 + Math.floor(Math.random() * 20)]);
+         Math.floor(Math.random() * 1800), 1999 + Math.floor(Math.random() * 20)]);
     }
   }
+
 }

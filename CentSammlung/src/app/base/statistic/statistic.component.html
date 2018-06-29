@@ -1,1 +1,26 @@
-{{data}}
+<div class="flexContainer">
+  <div>
+    <table mat-table [dataSource]="data" class="mat-elevation-z8">
+      <ng-container matColumnDef="jahr">
+        <th mat-header-cell *matHeaderCellDef> Jahr</th>
+        <td mat-cell *matCellDef="let data"> {{data.jahr}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="anzahl">
+        <th mat-header-cell *matHeaderCellDef> Anzahl </th>
+        <td mat-cell *matCellDef="let data"> {{data.anzahl}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="anteil">
+        <th mat-header-cell *matHeaderCellDef> Anteil </th>
+        <td mat-cell *matCellDef="let data"> {{data.anzahl/17715 | percent:'1.0-3'}} </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </div>
+  <div>
+    <app-pie-chart *ngIf="data" [data]="data"></app-pie-chart>
+  </div>
+</div>

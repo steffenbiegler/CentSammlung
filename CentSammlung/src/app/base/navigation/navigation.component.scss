@@ -1,0 +1,11 @@
+.flexContainer{
+    margin-top: 40px;
+    max-width: 150px;
+    display: flex;
+    justify-content: space-evenly; 
+    align-items: center;          
+    flex-wrap: wrap; 
+}
+.flexContainer img{
+   max-width: 70px;
+}

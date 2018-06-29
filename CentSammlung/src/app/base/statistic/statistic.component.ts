@@ -15,13 +15,11 @@ import * as d3 from 'd3';
 })
 export class StatisticComponent implements OnInit {
   data;
-
-
-
-  constructor(private centService: CentBackendService) {}
+  displayedColumns: string[] = ['jahr', 'anzahl', 'anteil'];
+   constructor(private centService: CentBackendService) {}
 
   ngOnInit() {
-    this.centService.getEuropeanCount().subscribe((data) => {
+    this.centService.getYearCount().subscribe((data) => {
       this.data = data;
     });
   }

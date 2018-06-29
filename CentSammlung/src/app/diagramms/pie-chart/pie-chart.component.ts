@@ -37,13 +37,12 @@ export class PieChartComponent implements OnInit {
       .attr('class', 'pie')
       .attr('transform', `translate(${element.offsetWidth / 2}, ${element.offsetHeight / 2})`);
     this.radius = Math.min(this.width, this.height) / 2;
-
   }
 
   updateChart() {
     const innerRadius = this.radius * 0.2;
     const outerRadius = this.radius * 0.8;
-    const pie = d3.pie().value(d => d[1]);
+    const pie = d3.pie().value(d => parseInt(d.anzahl, 10));
     const path = d3.arc().outerRadius( outerRadius ).innerRadius(innerRadius);
     const label = d3.arc().outerRadius( this.radius ).innerRadius(outerRadius);
     const pieColor = d3.scaleOrdinal(d3.schemeSet1);
@@ -65,9 +64,7 @@ export class PieChartComponent implements OnInit {
        .attr('transform', (datum: any) => {
                 return 'translate(' + label.centroid(datum) + ')';
         })
-        .text((datum, _index) => {
-          return datum.data[0] + ': ' + datum.value;
-        })
+        .text((datum, _index) =>  datum.data.jahr)
         .style('text-anchor', 'middle');
   }
 }

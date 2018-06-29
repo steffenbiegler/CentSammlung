@@ -400,9 +400,11 @@ function db_ranking($zeiger, $limit="")
 			. ' left join tbl_kombination using(idkomb)'
 			. ' left join tbl_stadt using(idstadt)'
 			. ' left join tbl_land using(idland)'
-			. ' group by land, stadt_lang, jahr'
-			. ' order by anz DESC';
-			if ($limit != "") $sql.=' limit 0,'.$limit; 
+			. ' group by land, stadt_lang, jahr';			
+			if ($limit != ""){
+				$sql.=' order by anz DESC'
+					. ' limit 0,'.$limit ;	
+			} 
 		$result= mysqli_query($zeiger, $sql);	
 		while($row = mysqli_fetch_array($result, MYSQLI_ASSOC))
 			{

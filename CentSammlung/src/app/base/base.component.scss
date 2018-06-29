@@ -1,15 +1,18 @@
 
 mat-toolbar{
-  background-color: blue;
+  background-color:#C4835E;
+	color:black;
   width: 100%;
   height:100px;
 }
 
 mat-sidenav-container{
-  min-height: 200px;
+  min-height: 500px;
 }
 
 mat-sidenav-content{
+  background: linear-gradient(#FADCB9 70%,#C4835E 95%);
+	color:#684432;
   display: flex;
   justify-content:flex-start
 }
@@ -22,4 +25,9 @@ mat-sidenav-content{
   width: 2px;
   height: 100%;
   min-height: 400px;
+}
+
+.logo{
+  overflow: visible;
+  z-index: 3;
 }
