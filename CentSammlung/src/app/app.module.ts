@@ -17,6 +17,9 @@ import { CombinationComponent } from './base/combination/combination.component';
 import { HistoryComponent } from './base/history/history.component';
 import { NavigationComponent } from './base/navigation/navigation.component';
 import { CounterComponent } from './counter/counter.component';
+import { BarChartComponent } from './diagramms/bar-chart/bar-chart.component';
+import { BubbleChartComponent } from './diagramms/bubble-chart/bubble-chart.component';
+import { PieChartComponent } from './diagramms/pie-chart/pie-chart.component';
 
 const appRoutes: Routes = [  {path: '', component: StartComponent },
                              {path: 'add', component: BaseComponent, children: [{ path: '', component: AddComponent}]},
@@ -39,7 +42,10 @@ const appRoutes: Routes = [  {path: '', component: StartComponent },
     StartComponent,
     BaseComponent,
     NavigationComponent,
-    CounterComponent
+    CounterComponent,
+    BarChartComponent,
+    BubbleChartComponent,
+    PieChartComponent
   ],
   imports: [
     BrowserModule,
