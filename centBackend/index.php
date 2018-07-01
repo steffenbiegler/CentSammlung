@@ -33,8 +33,8 @@
             echo json_encode(db_monatssummen($zeiger));
             break;
         case 'ranking':
-            echo json_encode(db_ranking($zeiger));
-            break;       
+            echo json_encode(db_ranking($zeiger, '40'));
+            break;
         default:
         $return = "Cent-Backend antwortet";
             break;

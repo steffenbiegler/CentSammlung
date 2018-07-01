@@ -15,7 +15,7 @@ export class CounterComponent implements OnInit {
   ngOnInit() {
     this.centService.getCount().subscribe((data) => {
       this.centCount = data;
-      this.centCount.digits = this.centCount.gesamt.split('');
+      this.centCount.digits = this.centCount.gesamt.toString().split('');
     });
   }
 

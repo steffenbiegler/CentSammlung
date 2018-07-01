@@ -24,8 +24,8 @@ export class RankingComponent implements OnInit {
      this.centService.getRanking().subscribe((data) => {
       this.data = [];
       for (let index = 0; index < data.length; index++) {
-        this.data.push([`${data[index].stadt_lang ? data[index].stadt_lang : data[index].land}`, parseInt(data[index].anz, 10),
-        parseInt(data[index].jahr, 10)]);
+        this.data.push([`${data[index].stadt_lang ? data[index].stadt_lang : data[index].land} ${data[index].jahr}` ,
+        parseInt(data[index].anz, 10)]);
       }
 
     });

@@ -6,8 +6,6 @@ import {
   CentBackendService
 } from '../../cent-backend.service';
 
-import * as d3 from 'd3';
-
 @Component({
   selector: 'app-statistic',
   templateUrl: './statistic.component.html',
@@ -15,12 +13,18 @@ import * as d3 from 'd3';
 })
 export class StatisticComponent implements OnInit {
   data;
+  centcount = 0;
   displayedColumns: string[] = ['jahr', 'anzahl', 'anteil'];
    constructor(private centService: CentBackendService) {}
 
   ngOnInit() {
     this.centService.getYearCount().subscribe((data) => {
-      this.data = data;
+      this.data = [];
+      for (let index = 0; index < data.length; index++) {
+        this.data.push([parseInt(data[index].jahr, 10), parseInt(data[index].anzahl, 10)]);
+        this.centcount += parseInt(data[index].anzahl, 10);
+      }
+      console.log(this.data);
     });
   }
 

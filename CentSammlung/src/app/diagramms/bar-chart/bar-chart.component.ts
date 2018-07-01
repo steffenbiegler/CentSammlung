@@ -44,14 +44,14 @@ export class BarChartComponent implements OnInit, OnChanges {
   createChart() {
     const element = this.chartContainer.nativeElement;
     this.width = element.offsetWidth - this.margin.left - this.margin.right;
-    this.height = element.offsetHeight - this.margin.top - this.margin.bottom;
+    this.height = element.offsetHeight - (this.margin.top - this.margin.bottom) / 2;
     const svg = d3.select(element).append('svg')
       .attr('width', element.offsetWidth)
       .attr('height', element.offsetHeight);
 
     this.chart = svg.append('g')
       .attr('class', 'bars')
-      .attr('transform', `translate(${this.margin.left}, ${this.margin.top})`);
+      .attr('transform', `translate(${this.margin.left}, ${this.margin.top / 2})`);
 
     this.colors = d3.scaleLinear().domain([0, this.data.length]).range(<any[]>[this.fromColor, this.toColor]);
 
