@@ -47,7 +47,7 @@ const appRoutes: Routes = [  {path: '', component: StartComponent },
     CounterComponent,
     BarChartComponent,
     BubbleChartComponent,
-    PieChartComponent
+    PieChartComponent,
   ],
   imports: [
     BrowserModule,
