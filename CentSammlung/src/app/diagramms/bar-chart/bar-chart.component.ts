@@ -124,7 +124,9 @@ export class BarChartComponent implements OnInit, OnChanges {
         this.xAxis.transition().call(d3.axisTop(this.xScale));
         this.yAxis.transition().call(d3.axisLeft(this.yScale));
         const update = this.chart.selectAll('.bar').data(this.data);
+
         update.exit().remove();
+
         this.chart.selectAll('.bar').transition()
           .attr('x', data => this.xScale(0))
           .attr('y', data => this.yScale(data.getLabel()))

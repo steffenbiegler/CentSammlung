@@ -1,27 +1,56 @@
- <div class='flexContainer'>
- <div>
-    <table mat-table [dataSource]="data" class="mat-elevation-z8">
-      <ng-container matColumnDef="jahr">
-        <th mat-header-cell *matHeaderCellDef> Jahr</th>
-        <td mat-cell *matCellDef="let data"> {{data[0]}} </td>
-      </ng-container>
+<table>
+  <tr>
+    <th>Jahr</th>
+    <th>Anzahl</th>
+    <th>Anteil</th>
+    <th>DETAILS</th>
+  </tr>
+  <tr *ngFor='let year of data'>
+    <td>
+      {{year.year}}
+    </td>
+    <td>
+      {{year.count}}
+    </td>
+    <td>
+      {{year.percentage}}
+    </td>
+    <td>
+      <table>
+        <tr>
+          <tr>
+            <th>Land</th>
+            <th>Anzahl</th>
+            <th>Anteil(Jahr)</th>
+            <th>DETAILS</th>
+          </tr>
+          <tr *ngFor='let country of year.countries'>
+            <td>{{country.country}}</td>
+            <td>{{country.count}}</td>
+            <td>{{country.percentage_from_year}}</td>
+            <td *ngIf='country.cities'>
+              <table>
+                <tr>
+                  <th>
+                    Stadt
+                  </th>
+                  <th>
+                    Anzahl
+                  </th>
+                  <th>
+                    Anteil(Land)
+                  </th>
+                </tr>
+                <tr *ngFor='let city of country.cities'>
+                    <td>{{city.city}}</td>
+                    <td>{{city.count}}</td>
+                    <td>{{city.percentage_from_country}}</td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+      </table>
+    </td>
 
-      <ng-container matColumnDef="anzahl">
-        <th mat-header-cell *matHeaderCellDef> Anzahl </th>
-        <td mat-cell *matCellDef="let data"> {{data[1]}} </td>
-      </ng-container>
-
-      <ng-container matColumnDef="anteil">
-        <th mat-header-cell *matHeaderCellDef> Anteil </th>
-        <td mat-cell *matCellDef="let data"> {{data[1]/centcount | percent:'1.0-3'}} </td>
-      </ng-container>
-      
-      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-    </table>
-    </div>
-    <div>
-    <app-pie-chart *ngIf="data" [data]="data"></app-pie-chart>      
-  </div> 
-</div>
-
+    </tr>
+</table>
