@@ -1,0 +1,44 @@
+Auswertung nach Stadt,Land,Jahr
+{
+	jahr:[ 
+		land: [
+			stadt: [
+				anzahl: , 
+				anteil_stadt_an_land:
+				anteil_stadt_an_jahr
+				anteil_stadt_an_gesamt: , 
+			], 
+			anteil_land_an_jahr:
+			anteil_land_an_gesamt:			
+		],
+		anteil_jahr_an_gesamt
+	]	
+}
+
+Auswertung nach Zeit 
+{	
+	cent: [Kombinationsinfo, Datum, anzahl]
+}
+
+Auswertung Zuwachs
+{ 
+	Eintragmonat: [
+		anzahl:
+		anzahl_deutscher_cent: 
+		trend-wert:
+	]
+}
+
+Kombination lesen 
+{
+	Land:[Jahr:[stadt]]
+}
+
+Gesamt-Cents
+{
+	Eintrag: [Anzahl, Max-Datum]
+}
+
+Ranking{
+	Eintrag: [Anzahl, Anteil]
+}
