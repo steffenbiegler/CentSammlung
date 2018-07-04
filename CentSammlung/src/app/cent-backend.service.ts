@@ -10,7 +10,9 @@ export class CentBackendService {
 
   constructor(private http: HttpClient) { }
 
-
+  isBackendAlive(): boolean {
+    return false;
+  }
   getCombinations(): Observable<any> {
     return this.http.get(this.baseUrl + 'combinations');
   }

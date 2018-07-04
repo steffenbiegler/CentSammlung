@@ -1,16 +1,19 @@
 <mat-toolbar>
-  <img alt="Cents!" src="assets/images/unsercent.png" (mouseover)="sidenav.open()" class='logo'/>  
+  <img alt="Cents!" src="assets/images/unsercent.png" (mouseover)="sidenav.open()" class='logo'/>
   <h1>Unsere 1-Cent-Sammlung</h1>
   <app-counter></app-counter>
 </mat-toolbar>
 <mat-sidenav-container class="example-container">
-    <mat-sidenav #sidenav mode="side" [(opened)]="opened" >
+    <mat-sidenav #sidenav mode="side" >
                  <app-navigation></app-navigation>
     </mat-sidenav>
 
     <mat-sidenav-content (click)="sidenav.close()">
         <div class='opener' (mouseover)="sidenav.open()">&nbsp;</div>
-        <router-outlet class='content' (mouseover)="sidenav.close()"></router-outlet>
+        <div>
+            <h2>{{ headline }}</h2>
+          <router-outlet class='content' (mouseover)="sidenav.close()"></router-outlet>
+        </div>
     </mat-sidenav-content>
   </mat-sidenav-container>
 

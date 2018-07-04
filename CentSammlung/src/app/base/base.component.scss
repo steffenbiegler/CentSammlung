@@ -14,7 +14,7 @@ mat-sidenav-content{
   background: linear-gradient(#FADCB9 70%,#C4835E 95%);
 	color:#684432;
   display: flex;
-  justify-content:flex-start
+  justify-content:flex-start;
 }
 
 .content{
@@ -22,12 +22,25 @@ mat-sidenav-content{
 }
 
 .opener{
-  width: 2px;
+  width: 1px;
   height: 100%;
-  min-height: 400px;
+  min-height: 600px;
+  background: linear-gradient(#684432 70%,#C4835E 95%);
 }
 
 .logo{
   overflow: visible;
   z-index: 3;
+  margin-right: 40px;
+}
+
+h2{
+  margin:0px;
+  text-align: center;
+  background-color: #684432;
+  color: #FADCB9;
+}
+
+div{
+  width: 100%;
 }

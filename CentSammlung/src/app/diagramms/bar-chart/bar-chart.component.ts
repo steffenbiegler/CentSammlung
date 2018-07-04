@@ -16,7 +16,7 @@ export class BarChartComponent implements OnInit, OnChanges {
   @Input() private horizontalOrientation ? = true;
   @Input() private fromColor ? = 'red';
   @Input() private toColor ? = 'blue';
-  @Input() private margin ?: any = { top: 20, bottom: 20, left: 20, right: 20};
+  @Input() private margin ?: any = { top: 20, bottom: 20, left: 100, right: 20};
   private chart: any;
   private width: number;
   private height: number;
@@ -56,8 +56,8 @@ export class BarChartComponent implements OnInit, OnChanges {
     this.colors = d3.scaleLinear().domain([0, this.data.length]).range(<any[]>[this.fromColor, this.toColor]);
 
     if (this.horizontalOrientation) {
-      const xDomain = this.data.map(d => d[0]);
-      const yDomain = [0, d3.max(this.data, d => d[1])];
+      const xDomain = this.data.map(data => data.getLabel());
+      const yDomain = [0, d3.max(this.data, data => data.getValue())];
       this.xScale = d3.scaleBand().padding(0.1).domain(xDomain).rangeRound([0, this.width]);
       this.yScale = d3.scaleLinear().domain(yDomain).range([this.height, 0]);
       this.xAxis = svg.append('g')
@@ -69,8 +69,8 @@ export class BarChartComponent implements OnInit, OnChanges {
         .attr('transform', `translate(${this.margin.left}, ${this.margin.top})`)
         .call(d3.axisLeft(this.yScale));
     } else {
-      const xDomain = [0, d3.max(this.data, d => d[1])];
-      const yDomain = this.data.map(d => d[0]);
+      const xDomain = [0, d3.max(this.data, data => data.getValue())];
+      const yDomain = this.data.map(data => data.getLabel());
       this.yScale = d3.scaleBand().padding(0.1).domain(yDomain).rangeRound([0, this.height]);
       this.xScale = d3.scaleLinear().domain(xDomain).range([0, this.width]);
       this.xAxis = svg.append('g')
@@ -86,8 +86,8 @@ export class BarChartComponent implements OnInit, OnChanges {
 
   updateChart() {
     if (this.horizontalOrientation) {
-      this.xScale.domain(this.data.map(d => d[0]));
-      this.yScale.domain([0, d3.max(this.data, d => d[1])]);
+      this.xScale.domain(this.data.map(data => data.getLabel()));
+      this.yScale.domain([0, d3.max(this.data, data => data.getValue())]);
       this.colors.domain([0, this.data.length]);
       this.xAxis.transition().call(d3.axisBottom(this.xScale));
       this.yAxis.transition().call(d3.axisLeft(this.yScale));
@@ -97,53 +97,53 @@ export class BarChartComponent implements OnInit, OnChanges {
       update.exit().remove();
 
       this.chart.selectAll('.bar').transition()
-        .attr('x', d => this.xScale(d[0]))
-        .attr('y', d => this.yScale(d[1]))
-        .attr('width', d => this.xScale.bandwidth())
-        .attr('height', d => this.height - this.yScale(d[1]))
-        .style('fill', (d, i) => this.colors(i));
+        .attr('x', data => this.xScale(data.getLabel()))
+        .attr('y', data => this.yScale(data.getValue()))
+        .attr('width', data => this.xScale.bandwidth())
+        .attr('height', data => this.height - this.yScale(data.getValue()))
+        .style('fill', (data, i) => this.colors(i));
 
       update
-        .enter()
+        .enter ()
         .append('rect')
         .attr('class', 'bar')
-        .attr('x', d => this.xScale(d[0]))
-        .attr('y', d => this.yScale(0))
+        .attr('x', data => this.xScale(data.getLabel()))
+        .attr('y', data => this.yScale(0))
         .attr('width', this.xScale.bandwidth())
         .attr('height', 0)
-        .style('fill', (d, i) => this.colors(i))
+        .style('fill', (data, i) => this.colors(i))
         .transition()
-        .delay((d, i) => i * 10)
-        .attr('y', d => this.yScale(d[1]))
-        .attr('height', d => this.height - this.yScale(d[1])); } else {
-      this.xScale.domain([0, d3.max(this.data, d => d[1])]);
-      this.yScale.domain(this.data.map(d => d[0]));
-      this.colors.domain([0, this.data.length]);
-      this.xAxis.transition().call(d3.axisTop(this.xScale));
-      this.yAxis.transition().call(d3.axisLeft(this.yScale));
+        .delay((data, i) => i * 10)
+        .attr('y', data => this.yScale(data.getValue()))
+        .attr('height', data => this.height - this.yScale(data.getValue()));
+      } else {
 
-      const update = this.chart.selectAll('.bar').data(this.data);
-      update.exit().remove();
+        this.xScale.domain([0, d3.max(this.data, data => data.getValue())]);
+        this.yScale.domain(this.data.map(data => data.getLabel()));
+        this.colors.domain([0, this.data.length]);
+        this.xAxis.transition().call(d3.axisTop(this.xScale));
+        this.yAxis.transition().call(d3.axisLeft(this.yScale));
+        const update = this.chart.selectAll('.bar').data(this.data);
+        update.exit().remove();
+        this.chart.selectAll('.bar').transition()
+          .attr('x', data => this.xScale(0))
+          .attr('y', data => this.yScale(data.getLabel()))
+          .attr('width',  data => this.xScale(data.getValue()))
+          .attr('height', this.yScale.bandwidth())
+          .style('fill', (data, i) => this.colors(i));
 
-      this.chart.selectAll('.bar').transition()
-        .attr('x', d => this.xScale(0))
-        .attr('y', d => this.yScale(d[0]))
-        .attr('width',  d => this.xScale(d[1]))
-        .attr('height', this.yScale.bandwidth())
-        .style('fill', (d, i) => this.colors(i));
-
-      update
-        .enter()
-        .append('rect')
-        .attr('class', 'bar')
-        .attr('x', d => this.xScale(0))
-        .attr('y', d => this.yScale(d[0]))
-        .attr('width', 0)
-        .attr('height', this.yScale.bandwidth())
-        .style('fill', (d, i) => this.colors(i))
-        .transition()
-        .delay((d, i) => i * 10)
-        .attr('width', d => this.xScale(d[1]));
+        update
+          .enter()
+          .append('rect')
+          .attr('class', 'bar')
+          .attr('x', data => this.xScale(0))
+          .attr('y', data => this.yScale(data.getLabel()))
+          .attr('width', 0)
+          .attr('height', this.yScale.bandwidth())
+          .style('fill', (data, i) => this.colors(i))
+          .transition()
+          .delay((data, i) => i * 10)
+          .attr('width', data => this.xScale(data.getValue()));
     }
 
   }
