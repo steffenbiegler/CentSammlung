@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {
+  Component,
+  OnInit
+} from '@angular/core';
 
 @Component({
   selector: 'app-add',
@@ -7,12 +10,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AddComponent implements OnInit {
 
- laender = ['andorra', 'belgien', 'deutschland', 'estland', 'finnland', 'frankreich', 'griechenland',
-'irland', 'italien', 'lettland', 'litauen', 'luxemburg', 'malta', 'monaco', 'niederlande', 'österreich', 'portugal' ];
+  laender = ['andorra', 'belgien', 'deutschland', 'estland', 'finnland', 'frankreich', 'griechenland',
+    'irland', 'italien', 'lettland', 'litauen', 'luxemburg', 'malta', 'monaco', 'niederlande', 'österreich', 'portugal'
+  ];
+  centCount = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit() {
+  ngOnInit() {}
+
+  addCent(komb: number) {
+    this.centCount[komb]++;
   }
 
+  removeCent(komb: number) {
+    this.centCount[komb]--;
+  }
 }

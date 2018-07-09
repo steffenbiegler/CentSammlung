@@ -1,129 +1,60 @@
 <div>
-  <img *ngFor='let land of laender' alt='{{land}}' title='{{land}}' src="assets/images/flaggen/{{land}}.gif" />
+  <img *ngFor='let land of laender' alt='{{land}}' title='{{land}}' src='assets/images/flaggen/{{land}}.gif' />
 </div>
-
 <Table>
   <tr>
     <th>Jahr</th>
     <th>Land 1</th>
     <th>Land 2</th>
     <th>Land 3</th>
-    <th>Land 4</th>
-    <th>Land 5</th>
-    <th></th>
   </tr>
   <tr>
-    <td>Jahr</td>
+    <td>Jahr 1</td>
     <td>
       <div class='flexContainer'>
-        <div class='buttonDiv add'>&nbsp;</div>
-        <div class='buttonDiv remove'>&nbsp;</div>
-        <div class='info'>Anzahl</div>
+        <div class='buttonDiv add' (click)='addCent(0);'>&nbsp;</div>
+        <div class='buttonDiv remove' (click)='removeCent(0);'>&nbsp;</div>
+        <div class='info'>{{centCount[0]}}</div>
       </div>
     </td>
     <td>
       <div class='flexContainer'>
-        <div class='buttonDiv add'>&nbsp;</div>
-        <div class='buttonDiv remove'>&nbsp;</div>
-        <div class='info'>Anzahl</div>
+        <div class='buttonDiv add' (click)='addCent(1);'>&nbsp;</div>
+        <div class='buttonDiv remove' (click)='removeCent(1);'>&nbsp;</div>
+        <div class='info'>{{centCount[1]}}</div>
       </div>
     </td>
     <td>
       <div class='flexContainer'>
-        <div class='buttonDiv add'>&nbsp;</div>
-        <div class='buttonDiv remove'>&nbsp;</div>
-        <div class='info'>Anzahl</div>
-      </div>
-    </td>
-    <td>
-      <div class='flexContainer'>
-        <div class='buttonDiv add'>&nbsp;</div>
-        <div class='buttonDiv remove'>&nbsp;</div>
-        <div class='info'>Anzahl</div>
-      </div>
-    </td>
-    <td>
-      <div class='flexContainer'>
-        <div class='buttonDiv add'>&nbsp;</div>
-        <div class='buttonDiv remove'>&nbsp;</div>
-        <div class='info'>Anzahl</div>
+        <div class='buttonDiv add' (click)='addCent(2);'>&nbsp;</div>
+        <div class='buttonDiv remove' (click)='removeCent(2);'>&nbsp;</div>
+        <div class='info'>{{centCount[2]}}</div>
       </div>
     </td>
   </tr>
   <tr>
-    <td>Jahr</td>
+    <td>Jahr 2</td>
     <td>
       <div class='flexContainer'>
-        <div class='buttonDiv add'>&nbsp;</div>
-        <div class='buttonDiv remove'>&nbsp;</div>
-        <div class='info'>Anzahl</div>
+        <div class='buttonDiv add' (click)='addCent(3);'>&nbsp;</div>
+        <div class='buttonDiv remove' (click)='removeCent(3);'>&nbsp;</div>
+        <div class='info'>{{centCount[3]}}</div>
       </div>
     </td>
     <td>
       <div class='flexContainer'>
-        <div class='buttonDiv add'>&nbsp;</div>
-        <div class='buttonDiv remove'>&nbsp;</div>
-        <div class='info'>Anzahl</div>
+        <div class='buttonDiv add' (click)='addCent(4);'>&nbsp;</div>
+        <div class='buttonDiv remove' (click)='removeCent(4);'>&nbsp;</div>
+        <div class='info'>{{centCount[4]}}</div>
       </div>
     </td>
     <td>
       <div class='flexContainer'>
-        <div class='buttonDiv add'>&nbsp;</div>
-        <div class='buttonDiv remove'>&nbsp;</div>
-        <div class='info'>Anzahl</div>
-      </div>
-    </td>
-    <td>
-      <div class='flexContainer'>
-        <div class='buttonDiv add'>&nbsp;</div>
-        <div class='buttonDiv remove'>&nbsp;</div>
-        <div class='info'>Anzahl</div>
-      </div>
-    </td>
-    <td>
-      <div class='flexContainer'>
-        <div class='buttonDiv add'>&nbsp;</div>
-        <div class='buttonDiv remove'>&nbsp;</div>
-        <div class='info'>Anzahl</div>
+        <div class='buttonDiv add' (click)='addCent(5);'>&nbsp;</div>
+        <div class='buttonDiv remove' (click)='removeCent(5);'>&nbsp;</div>
+        <div class='info'>{{centCount[5]}}</div>
       </div>
     </td>
   </tr>
-  <tr>
-    <td>Jahr</td>
-    <td>
-      <div class='flexContainer'>
-        <div class='buttonDiv add'>&nbsp;</div>
-        <div class='buttonDiv remove'>&nbsp;</div>
-        <div class='info'>Anzahl</div>
-      </div>
-    </td>
-    <td>
-      <div class='flexContainer'>
-        <div class='buttonDiv add'>&nbsp;</div>
-        <div class='buttonDiv remove'>&nbsp;</div>
-        <div class='info'>Anzahl</div>
-      </div>
-    </td>
-    <td>
-      <div class='flexContainer'>
-        <div class='buttonDiv add'>&nbsp;</div>
-        <div class='buttonDiv remove'>&nbsp;</div>
-        <div class='info'>Anzahl</div>
-      </div>
-    </td>
-    <td>
-      <div class='flexContainer'>
-        <div class='buttonDiv add'>&nbsp;</div>
-        <div class='buttonDiv remove'>&nbsp;</div>
-        <div class='info'>Anzahl</div>
-      </div>
-    </td>
-    <td>
-      <div class='flexContainer'>
-        <div class='buttonDiv add'>&nbsp;</div>
-        <div class='buttonDiv remove'>&nbsp;</div>
-        <div class='info'>Anzahl</div>
-      </div>
-    </td>
-  </tr>
+
 </Table>
