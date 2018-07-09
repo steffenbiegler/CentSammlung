@@ -1,0 +1,31 @@
+export const LAENDER = [
+  ['deutschland', [
+    ['Berlin', 'A'],
+    ['München', 'D'],
+    ['Stuttgard', 'F'],
+    ['Karlsruhe', 'G'],
+    ['Hamburg', 'J']
+  ]],
+  'andorra',
+  'belgien',
+  'estland',
+  'finnland',
+  'frankreich',
+  'griechenland',
+  'irland',
+  'italien',
+  'lettland',
+  'litauen',
+  'luxemburg',
+  'malta',
+  'monaco',
+  'niederlande',
+  'österreich',
+  'portugal',
+  'san marino',
+  'slowakei',
+  'slowenien',
+  'spanien',
+  'vatikan',
+  'zypern'
+];

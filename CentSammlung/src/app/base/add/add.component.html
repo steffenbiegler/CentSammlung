@@ -3,13 +3,18 @@
 </div>
 <Table>
   <tr>
-    <th>Jahr</th>
-    <th>Land 1</th>
-    <th>Land 2</th>
-    <th>Land 3</th>
+    <th rowspan='2'>Jahr</th>
+    <th colspan='5'>Deutschland  <img alt='Deutschland' title='Deutschland' src='assets/images/flaggen/deutschland.gif' /></th>
   </tr>
   <tr>
-    <td>Jahr 1</td>
+    <th>Berlin</th>
+    <th>München</th>
+    <th>Stuttgard</th>
+    <th>Karlsruhe</th>
+    <th>Hamburg</th>
+  </tr>
+  <tr>
+    <td>2002</td>
     <td>
       <div class='flexContainer'>
         <div class='buttonDiv add' (click)='addCent(0);'>&nbsp;</div>
@@ -31,9 +36,6 @@
         <div class='info'>{{centCount[2]}}</div>
       </div>
     </td>
-  </tr>
-  <tr>
-    <td>Jahr 2</td>
     <td>
       <div class='flexContainer'>
         <div class='buttonDiv add' (click)='addCent(3);'>&nbsp;</div>
@@ -48,6 +50,9 @@
         <div class='info'>{{centCount[4]}}</div>
       </div>
     </td>
+  </tr>
+  <tr>
+    <td>2004</td>
     <td>
       <div class='flexContainer'>
         <div class='buttonDiv add' (click)='addCent(5);'>&nbsp;</div>
@@ -55,6 +60,36 @@
         <div class='info'>{{centCount[5]}}</div>
       </div>
     </td>
+    <td>
+      <div class='flexContainer'>
+        <div class='buttonDiv add' (click)='addCent(6);'>&nbsp;</div>
+        <div class='buttonDiv remove' (click)='removeCent(6);'>&nbsp;</div>
+        <div class='info'>{{centCount[6]}}</div>
+      </div>
+    </td>
+    <td>
+      <div class='flexContainer'>
+        <div class='buttonDiv add' (click)='addCent(7);'>&nbsp;</div>
+        <div class='buttonDiv remove' (click)='removeCent(7);'>&nbsp;</div>
+        <div class='info'>{{centCount[7]}}</div>
+      </div>
+    </td>
+    <td>
+      <div class='flexContainer'>
+        <div class='buttonDiv add' (click)='addCent(8);'>&nbsp;</div>
+        <div class='buttonDiv remove' (click)='removeCent(8);'>&nbsp;</div>
+        <div class='info'>{{centCount[8]}}</div>
+      </div>
+    </td>
+    <td>
+      <div class='flexContainer'>
+        <div class='buttonDiv add' (click)='addCent(9);'>&nbsp;</div>
+        <div class='buttonDiv remove' (click)='removeCent(9);'>&nbsp;</div>
+        <div class='info'>{{centCount[9]}}</div>
+      </div>
+    </td>
   </tr>
 
 </Table>
+
+<button>submit!</button>

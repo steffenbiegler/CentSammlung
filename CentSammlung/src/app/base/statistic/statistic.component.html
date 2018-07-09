@@ -1,56 +1,20 @@
-<table>
-  <tr>
-    <th>Jahr</th>
-    <th>Anzahl</th>
-    <th>Anteil</th>
-    <th>DETAILS</th>
-  </tr>
-  <tr *ngFor='let year of data'>
-    <td>
-      {{year.year}}
-    </td>
-    <td>
-      {{year.count}}
-    </td>
-    <td>
-      {{year.percentage}}
-    </td>
-    <td>
-      <table>
-        <tr>
-          <tr>
-            <th>Land</th>
-            <th>Anzahl</th>
-            <th>Anteil(Jahr)</th>
-            <th>DETAILS</th>
-          </tr>
-          <tr *ngFor='let country of year.countries'>
-            <td>{{country.country}}</td>
-            <td>{{country.count}}</td>
-            <td>{{country.percentage_from_year}}</td>
-            <td *ngIf='country.cities'>
-              <table>
-                <tr>
-                  <th>
-                    Stadt
-                  </th>
-                  <th>
-                    Anzahl
-                  </th>
-                  <th>
-                    Anteil(Land)
-                  </th>
-                </tr>
-                <tr *ngFor='let city of country.cities'>
-                    <td>{{city.city}}</td>
-                    <td>{{city.count}}</td>
-                    <td>{{city.percentage_from_country}}</td>
-                </tr>
-              </table>
-            </td>
-          </tr>
-      </table>
-    </td>
-
-    </tr>
-</table>
+<mat-tab-group dynamicHeight>
+  <mat-tab label="Jahre">
+     jahre
+  </mat-tab>
+  <mat-tab label="Europa">
+    <ng-template matTabContent>
+      EU
+    </ng-template>
+  </mat-tab>
+  <mat-tab label="Deutschland">
+    <ng-template matTabContent>
+      SCHLAAAAND!
+    </ng-template>
+  </mat-tab>
+  <mat-tab label="Zuwachs">
+    <ng-template matTabContent>
+      Zuwachs!
+    </ng-template>
+  </mat-tab>
+</mat-tab-group>
