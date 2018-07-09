@@ -20,43 +20,11 @@ export class StatisticComponent implements OnInit {
         this.data = data;
       });
     } else {
-      this.data = [{
+     /* this.data = [{
           year: 2018,
           percentage: '34%',
           count: 600,
-          countries: [{
-              country: 'Land1',
-              percentage: '6%',
-              percentage_from_year: '17%',
-              count: 100
-            },
-            {
-              country: 'Land2',
-              percentage: '11%',
-              percentage_from_year: '33%',
-              count: 200
-            },
-            {
-              country: 'Deutschland',
-              percentage: '17%',
-              percentage_from_year: '50%',
-              count: 300,
-              cities: [{
-                  city: ['Berlin', 'A'],
-                  count: 124,
-                  percentage: '7%',
-                  percentage_from_country: '41%',
-                  percentage_from_year: '21%'
-                },
-                {
-                  city: ['München', 'D'],
-                  count: 176,
-                  percentage: '10%',
-                  percentage_from_country: '59%',
-                  percentage_from_year: '29%'
-                }
-              ]
-            }
+          countries: [
           ]
         },
         {
@@ -100,7 +68,8 @@ export class StatisticComponent implements OnInit {
 
         }
       ];
-      console.log(this.data);
+      console.log(this.data);*/
     }
 
   }
+}

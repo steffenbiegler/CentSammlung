@@ -1,0 +1,36 @@
+.flexContainer{
+  display: flex;
+}
+
+
+.info{
+  position: absolute;
+  z-index: 0;
+}
+
+.add{
+  flex-grow:4;
+  z-index: 1;
+  &:hover{
+    background-color: rgba(0, 255, 0, 0.5);
+  }
+}
+
+.remove{
+  flex-grow: 1;
+  cursor: pointer;
+  &:hover{
+    background-color: rgba(255, 0, 0, 0.5);
+
+  }
+}
+
+.buttonDiv{
+  text-align: center;
+  z-index: 1;
+  cursor: pointer;
+  &:hover{
+    color:white;
+    font-weight: bold;
+  }
+}
