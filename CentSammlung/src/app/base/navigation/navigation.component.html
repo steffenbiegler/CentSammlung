@@ -1,11 +1,14 @@
-<div class="flexContainer"> 
-    <img class='anklickbar' routerLink="/report" routerLinkActive="active" title="Monatsabrechnung" alt="Monatsabrechnung" src="assets/images/monatsabrechnung.png"/>
-    <img class='anklickbar' routerLink="/add" routerLinkActive="active" title="Cents eintragen" alt="Cents eintragen" src="assets/images/eintragen.png"/>
-    <img class='anklickbar' routerLink="/add" routerLinkActive="active" title="deutsche Cents eintragen" alt="deutsche Cents eintragen" src="assets/images/deutscheintragen.png"/>
-    <img class='anklickbar' routerLink="/comb" routerLinkActive="active" title="Pr&auml;gekombinationen" alt="Pr&auml;gekombinationen" src="assets/images/praegekombi.png"/>  
-    <img class='anklickbar' routerLink="/history" routerLinkActive="active" title="History" alt="History" src="assets/images/history.png" />
-    <img class='anklickbar' routerLink="/stat" routerLinkActive="active" title="Statistiken" alt="Statistiken" src="assets/images/statistiken.png"/>
-    <img class='anklickbar' routerLink="/ranking" routerLinkActive="active" title="Ranking" alt="Ranking" src="assets/images/ranking.png" />
-    <img class='anklickbar' routerLink="/save" routerLinkActive="active" title="Datensicherung" alt="Datensicherung" src="assets/images/datensicherung.png"/>
-</div>
 
+<app-counter></app-counter>
+
+<img id="logo" class='anklickbar' routerLink="/" src="assets/images/unsercent.png" />
+<ul>
+  <li class='anklickbar' routerLink="/add" routerLinkActive="active" class="routerlink"> Eintragen </li>
+
+  <li class='anklickbar' routerLink="/stat" routerLinkActive="active" class="routerlink"> Statistik</li>
+  <li class='anklickbar' routerLink="/report" routerLinkActive="active" class="routerlink"> Zuwachs</li>
+  <li class='anklickbar' routerLink="/ranking" routerLinkActive="active" class="routerlink"> Ranking</li>
+
+  <li class='anklickbar' routerLink="/comb" routerLinkActive="active" class="routerlink"> Kombinationen</li>
+  <li class='anklickbar' routerLink="/history" routerLinkActive="active" class="routerlink"> Verlauf</li>
+</ul>

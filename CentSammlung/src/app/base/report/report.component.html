@@ -1,3 +1,21 @@
-<p>
-  report works!
-</p>
+<mat-tab-group dynamicHeight>
+    <mat-tab label="Monate">
+       Monates auswahl
+    </mat-tab>
+    <mat-tab label="Jahre">
+        <ng-template matTabContent>
+          Jahre
+        </ng-template>
+      </mat-tab>
+    <mat-tab label="Gesamt">
+      <ng-template matTabContent>
+        Diagramm
+      </ng-template>
+    </mat-tab>
+    <mat-tab label="Städte">
+      <ng-template matTabContent>
+        Stadtauswahl
+      </ng-template>
+    </mat-tab>
+
+  </mat-tab-group>

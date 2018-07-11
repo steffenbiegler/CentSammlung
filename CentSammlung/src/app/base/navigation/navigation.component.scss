@@ -1,11 +1,31 @@
-.flexContainer{
-    margin-top: 40px;
-    max-width: 150px;
-    display: flex;
-    justify-content: space-evenly; 
-    align-items: center;          
-    flex-wrap: wrap; 
+ul{
+  list-style: none;
+  background-color: #c4835e;
+  color:#684432;
+  padding: 0px;
 }
-.flexContainer img{
-   max-width: 70px;
+
+li{
+  height: 2em;
+  line-height: 2em;
+  display: block;
+  padding: 0.5em;
+}
+
+li.routerlink:hover{
+  background-color: #684432;
+  color:white;
+  font-weight: bold;
+  cursor: pointer;
+}
+.active{
+  background-color: #fadcb9;
+}
+
+#logo{
+  border-radius: 50%;
+  width: 100px;
+  height: 100px;
+  display: block;
+  margin: 1em auto;
 }

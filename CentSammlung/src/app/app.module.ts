@@ -10,7 +10,7 @@ import { RouterModule, Routes} from '@angular/router';
 import { MaterialModule } from './MaterialModule/material.module';
 
 import { AppComponent } from './app.component';
-import { StartComponent } from './start/start.component';
+import { StartComponent } from './base/start/start.component';
 
 import { BaseComponent } from './base/base.component';
 import { AddComponent } from './base/add/add.component';
@@ -25,7 +25,7 @@ import { BarChartComponent } from './diagramms/bar-chart/bar-chart.component';
 import { BubbleChartComponent } from './diagramms/bubble-chart/bubble-chart.component';
 import { PieChartComponent } from './diagramms/pie-chart/pie-chart.component';
 
-const appRoutes: Routes = [  {path: '', component: StartComponent },
+const appRoutes: Routes = [  {path: '', component: BaseComponent, children: [{ path: '', component: StartComponent}]},
                              {path: 'add', component: BaseComponent, children: [{ path: '', component: AddComponent}]},
                              {path: 'stat', component: BaseComponent, children: [{ path: '', component: StatisticComponent}]},
                              {path: 'ranking', component: BaseComponent, children: [{ path: '', component: RankingComponent}]},

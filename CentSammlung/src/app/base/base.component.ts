@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-base',
@@ -11,27 +11,6 @@ export class BaseComponent implements OnInit {
   private route: ActivatedRoute;
 
   constructor(private _router: Router) {
-    switch (_router.url) {
-      case '/add':
-            this.headline = 'Cent(s) hinzufügen';
-            break;
-      case '/report':
-            this.headline = 'Monatsabrechnung';
-            break;
-      case '/comb':
-            this.headline = 'Prägekombinationen';
-            break;
-      case '/history':
-            this.headline = 'Verlauf';
-            break;
-      case '/stat':
-            this.headline = 'Statistiken';
-            break;
-      case '/ranking':
-            this.headline = 'Cent-Ranking';
-            break;
-      default: this.headline = _router.url; break;
-    }
   }
 
   ngOnInit() {

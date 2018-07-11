@@ -1,46 +1,10 @@
-
-mat-toolbar{
-  background-color:#C4835E;
-	color:black;
-  width: 100%;
-  height:100px;
-}
-
-mat-drawer-container{
-  min-height: 500px;
-}
-
-mat-drawer-content{
-  background: linear-gradient(#FADCB9 70%,#C4835E 95%);
-	color:#684432;
-  display: flex;
-  justify-content:flex-start;
-}
-
-.content{
-  align-self: center;
-}
-
-.opener{
-  width: 1px;
+.mat-drawer-container{
   height: 100%;
-  min-height: 600px;
-  background: linear-gradient(#684432 70%,#C4835E 95%);
+  background-color: #fadcb9;
 }
 
-.logo{
-  overflow: visible;
-  z-index: 3;
-  margin-right: 40px;
+.mat-drawer{
+  background-color:#684432;
 }
 
-h2{
-  margin:0px;
-  text-align: center;
-  background-color: #684432;
-  color: #FADCB9;
-}
 
-div{
-  width: 100%;
-}
