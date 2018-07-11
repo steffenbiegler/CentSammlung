@@ -1,6 +1,8 @@
 import {  Component,  OnInit } from '@angular/core';
 import {  YearCombinationResultSet } from '../../resultData/combination-result';
 import { LAENDER } from '../../constants';
+
+import { CentBackendService } from '../../cent-backend.service';
 import { MatTableDataSource } from '@angular/material';
 
 @Component({
@@ -11,16 +13,12 @@ import { MatTableDataSource } from '@angular/material';
 export class AddComponent implements OnInit {
 
   dataSource;
-  centCount = [];
   combinations: YearCombinationResultSet[];
-  displayedColumns = ['year', 'belgien', 'österreich'];
+  centCount = [];
+  displayedColumns = ['year', 'deutschland'];
   countries;
 
-  constructor() {
-  }
-
-
-  ngOnInit() {
+  constructor(private centService: CentBackendService) {
     this.countries = LAENDER;
     this.combinations = [
       {year: 1999,
@@ -46,8 +44,15 @@ export class AddComponent implements OnInit {
                     {country: 'österreich', combination: 4},
                               ]},
     ];
-    this.dataSource = new MatTableDataSource(this.combinations);
   }
+
+
+  ngOnInit() {
+      this.centService.getYearCombinations().subscribe((data: YearCombinationResultSet[]) => {
+          this.combinations = data;
+          this.dataSource = new MatTableDataSource(this.combinations);
+        });
+    }
 
   addCent(komb: number) {
     if (this.centCount[komb] != null) {
@@ -55,7 +60,6 @@ export class AddComponent implements OnInit {
     } else {
       this.centCount[komb] = 1;
     }
-    console.log(this.centCount);
   }
 
   removeCent(komb: number) {
@@ -72,7 +76,7 @@ export class AddComponent implements OnInit {
   }
 
   getCombination(year: YearCombinationResultSet, country: string) {
-    const result = year.countries.filter((entry) => entry.country === country)[0];
+    const result = year.countries.filter((entry) => entry.country.toLowerCase() === country.toLowerCase() )[0];
     if (result) {
       if (!this.centCount[result.combination]) { this.centCount[result.combination] = 0 ; }
       return result.combination;

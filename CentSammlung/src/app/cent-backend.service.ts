@@ -6,13 +6,19 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class CentBackendService {
-  private baseUrl = 'http://127.0.0.1:80/centBackend/?step=';
+  private baseUrl = 'http://127.0.0.1:80/centBackend/?request=';
 
   constructor(private http: HttpClient) { }
 
   isBackendAlive(): boolean {
     return false;
   }
+
+  getYearCombinations(): Observable<any> {
+    return this.http.get(this.baseUrl + '  comb_year');
+   }
+   // --------------------------------------- Refinement done
+
   getCombinations(): Observable<any> {
     return this.http.get(this.baseUrl + 'combinations');
   }

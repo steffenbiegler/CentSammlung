@@ -16,6 +16,27 @@ function db_trennen($zeiger){
 	}
 }
 
+function getYearCombinationResultSet($pointer){
+	if ($pointer){		
+		$sql = "SELECT Jahr as year, GROUP_CONCAT(CONCAT(land, '|',IDkomb)) as countries FROM `tbl_kombination` LEFT JOIN `tbl_land` USING(IDland) LEFT JOIN `tbl_stadt` USING(IDstadt) Group By `jahr` ASC;";
+		$result= mysqli_query($pointer, $sql);	
+		while($row = mysqli_fetch_array($result, MYSQLI_ASSOC))
+		{
+			$combinations = explode(',',$row["countries"]);
+			$row['countries'] = null;
+			foreach ($combinations as $key => $value) {
+				$combination = explode('|',$value);
+				$row['countries'][] = ['country'=>$combination[0],'combination' =>$combination[1]];
+			}			
+			$YearCombinationResultSet[]= $row;
+		}	
+		return $YearCombinationResultSet;
+	}		
+}
+
+
+/* ab hier alte funktionen */
+
 
 function db_cent_hinzufuegen($zeiger, $anzahl, $idkomb, $datum =""){	
 	if ($zeiger){

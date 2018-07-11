@@ -7,7 +7,12 @@
 
     $zeiger = db_verbinden();
     
-    switch ($step) {
+    switch ($request) {
+        case 'comb_year':
+            echo json_encode(getYearCombinationResultSet($zeiger));
+            break;           
+     
+     
         case 'countries':
             echo json_encode(db_laender($zeiger));
             break;        

@@ -3,7 +3,7 @@
   </span>
 
 
-<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+<table mat-table *ngIf='dataSource' [dataSource]="dataSource" class="mat-elevation-z8">
 
     <ng-container matColumnDef="year">
       <th mat-header-cell *matHeaderCellDef> Jahr </th>
