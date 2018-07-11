@@ -1,11 +1,5 @@
 export const LAENDER = [
-  ['deutschland', [
-    ['Berlin', 'A'],
-    ['München', 'D'],
-    ['Stuttgard', 'F'],
-    ['Karlsruhe', 'G'],
-    ['Hamburg', 'J']
-  ]],
+  'deutschland',
   'andorra',
   'belgien',
   'estland',

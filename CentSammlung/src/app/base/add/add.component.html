@@ -1,3 +1,8 @@
+<span *ngFor='let country of countries'>
+    <img *ngIf = '!displayedColumns.includes(country)' (click)="addColumn(country)" alt='{{country}}' title='{{country}}' src='assets/images/flaggen/{{country}}.gif' />
+  </span>
+
+
 <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
     <ng-container matColumnDef="year">
@@ -6,16 +11,20 @@
     </ng-container>
 
     <ng-container *ngFor='let country of countries' matColumnDef="{{country}}">
-        <th mat-header-cell *matHeaderCellDef> {{country}} </th>
+        <th mat-header-cell *matHeaderCellDef>
+            <img alt='{{country}}' title='{{country}}' src='assets/images/flaggen/{{country}}.gif' />
+        </th>
         <td mat-cell *matCellDef="let year">
-          // TODOODO
-          <span *ngIf="year.countries.includes(country.country)">
-            yay
+
+           <span *ngIf="getCombination(year,country)">
               <div class='flexContainer'>
-                  <div class='buttonDiv add' (click)='addCent(country.combination);'>&nbsp;</div>
-                  <div class='buttonDiv remove' (click)='removeCent(country.combination);'>&nbsp;</div>
-                  <div class='info'>{{centCount[country][year]}}</div>
+                  <div class='buttonDiv add' (click)='addCent(getCombination(year,country));'>&nbsp;</div>
+                  <div class='buttonDiv remove' (click)='removeCent(getCombination(year,country));'>&nbsp;</div>
+                  <div class='info'>{{centCount[getCombination(year,country)]}}</div>
               </div>
+          </span>
+          <span *ngIf="!getCombination(year,country)">
+            ---
           </span>
         </td>
       </ng-container>
@@ -24,95 +33,3 @@
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
 
-
-<!--
-
-<Table>
-  <tr>
-    <th rowspan='2'>Jahr</th>
-    <th colspan='5'>Deutschland  <img alt='Deutschland' title='Deutschland' src='assets/images/flaggen/deutschland.gif' /></th>
-  </tr>
-  <tr>
-    <th>Berlin</th>
-    <th>München</th>
-    <th>Stuttgard</th>
-    <th>Karlsruhe</th>
-    <th>Hamburg</th>
-  </tr>
-  <tr>
-    <td>2002</td>
-    <td>
-
-    </td>
-    <td>
-      <div class='flexContainer'>
-        <div class='buttonDiv add' (click)='addCent(1);'>&nbsp;</div>
-        <div class='buttonDiv remove' (click)='removeCent(1);'>&nbsp;</div>
-        <div class='info'>{{centCount[1]}}</div>
-      </div>
-    </td>
-    <td>
-      <div class='flexContainer'>
-        <div class='buttonDiv add' (click)='addCent(2);'>&nbsp;</div>
-        <div class='buttonDiv remove' (click)='removeCent(2);'>&nbsp;</div>
-        <div class='info'>{{centCount[2]}}</div>
-      </div>
-    </td>
-    <td>
-      <div class='flexContainer'>
-        <div class='buttonDiv add' (click)='addCent(3);'>&nbsp;</div>
-        <div class='buttonDiv remove' (click)='removeCent(3);'>&nbsp;</div>
-        <div class='info'>{{centCount[3]}}</div>
-      </div>
-    </td>
-    <td>
-      <div class='flexContainer'>
-        <div class='buttonDiv add' (click)='addCent(4);'>&nbsp;</div>
-        <div class='buttonDiv remove' (click)='removeCent(4);'>&nbsp;</div>
-        <div class='info'>{{centCount[4]}}</div>
-      </div>
-    </td>
-  </tr>
-  <tr>
-    <td>2004</td>
-    <td>
-      <div class='flexContainer'>
-        <div class='buttonDiv add' (click)='addCent(5);'>&nbsp;</div>
-        <div class='buttonDiv remove' (click)='removeCent(5);'>&nbsp;</div>
-        <div class='info'>{{centCount[5]}}</div>
-      </div>
-    </td>
-    <td>
-      <div class='flexContainer'>
-        <div class='buttonDiv add' (click)='addCent(6);'>&nbsp;</div>
-        <div class='buttonDiv remove' (click)='removeCent(6);'>&nbsp;</div>
-        <div class='info'>{{centCount[6]}}</div>
-      </div>
-    </td>
-    <td>
-      <div class='flexContainer'>
-        <div class='buttonDiv add' (click)='addCent(7);'>&nbsp;</div>
-        <div class='buttonDiv remove' (click)='removeCent(7);'>&nbsp;</div>
-        <div class='info'>{{centCount[7]}}</div>
-      </div>
-    </td>
-    <td>
-      <div class='flexContainer'>
-        <div class='buttonDiv add' (click)='addCent(8);'>&nbsp;</div>
-        <div class='buttonDiv remove' (click)='removeCent(8);'>&nbsp;</div>
-        <div class='info'>{{centCount[8]}}</div>
-      </div>
-    </td>
-    <td>
-      <div class='flexContainer'>
-        <div class='buttonDiv add' (click)='addCent(9);'>&nbsp;</div>
-        <div class='buttonDiv remove' (click)='removeCent(9);'>&nbsp;</div>
-        <div class='info'>{{centCount[9]}}</div>
-      </div>
-    </td>
-  </tr>
-
-</Table>
-
-<button>submit!</button>
--->

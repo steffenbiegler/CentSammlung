@@ -23,10 +23,27 @@ export class AddComponent implements OnInit {
   ngOnInit() {
     this.countries = LAENDER;
     this.combinations = [
+      {year: 1999,
+        countries: [{country: 'österreich', combination: 3},
+                               ]},
       {year: 2002,
        countries: [{country: 'deutschland', combination: 0},
                    {country: 'belgien', combination: 1},
-                   {country: 'österreich', combination: 3},
+                              ]} ,
+      {year: 2004,
+       countries: [{country: 'deutschland', combination: 2},
+                   {country: 'österreich', combination: 4},
+                              ]},
+      {year: 2005,
+        countries: [{country: 'österreich', combination: 3},
+                                ]},
+      {year: 2010,
+        countries: [{country: 'deutschland', combination: 0},
+                    {country: 'belgien', combination: 1},
+                              ]} ,
+      {year: 2014,
+        countries: [{country: 'deutschland', combination: 2},
+                    {country: 'österreich', combination: 4},
                               ]},
     ];
     this.dataSource = new MatTableDataSource(this.combinations);
@@ -38,6 +55,7 @@ export class AddComponent implements OnInit {
     } else {
       this.centCount[komb] = 1;
     }
+    console.log(this.centCount);
   }
 
   removeCent(komb: number) {
@@ -49,7 +67,17 @@ export class AddComponent implements OnInit {
 
   }
 
-  addColumn() {
-
+  addColumn(country) {
+    this.displayedColumns.push(country);
   }
+
+  getCombination(year: YearCombinationResultSet, country: string) {
+    const result = year.countries.filter((entry) => entry.country === country)[0];
+    if (result) {
+      if (!this.centCount[result.combination]) { this.centCount[result.combination] = 0 ; }
+      return result.combination;
+    }
+    return false;
+  }
+
 }
