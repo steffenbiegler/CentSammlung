@@ -1,6 +1,32 @@
-<div>
-  <img *ngFor='let land of laender' alt='{{land}}' title='{{land}}' src='assets/images/flaggen/{{land}}.gif' />
-</div>
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+    <ng-container matColumnDef="year">
+      <th mat-header-cell *matHeaderCellDef> Jahr </th>
+      <td mat-cell *matCellDef="let year"> {{year.year}} </td>
+    </ng-container>
+
+    <ng-container *ngFor='let country of countries' matColumnDef="{{country}}">
+        <th mat-header-cell *matHeaderCellDef> {{country}} </th>
+        <td mat-cell *matCellDef="let year">
+          // TODOODO
+          <span *ngIf="year.countries.includes(country.country)">
+            yay
+              <div class='flexContainer'>
+                  <div class='buttonDiv add' (click)='addCent(country.combination);'>&nbsp;</div>
+                  <div class='buttonDiv remove' (click)='removeCent(country.combination);'>&nbsp;</div>
+                  <div class='info'>{{centCount[country][year]}}</div>
+              </div>
+          </span>
+        </td>
+      </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+
+<!--
+
 <Table>
   <tr>
     <th rowspan='2'>Jahr</th>
@@ -16,11 +42,7 @@
   <tr>
     <td>2002</td>
     <td>
-      <div class='flexContainer'>
-        <div class='buttonDiv add' (click)='addCent(0);'>&nbsp;</div>
-        <div class='buttonDiv remove' (click)='removeCent(0);'>&nbsp;</div>
-        <div class='info'>{{centCount[0]}}</div>
-      </div>
+
     </td>
     <td>
       <div class='flexContainer'>
@@ -93,3 +115,4 @@
 </Table>
 
 <button>submit!</button>
+-->

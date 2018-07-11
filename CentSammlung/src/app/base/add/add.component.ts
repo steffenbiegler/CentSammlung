@@ -1,10 +1,7 @@
-import {
-  Component,
-  OnInit
-} from '@angular/core';
-import {
-  LAENDER
-} from '../../constants';
+import {  Component,  OnInit } from '@angular/core';
+import {  YearCombinationResultSet } from '../../resultData/combination-result';
+import { LAENDER } from '../../constants';
+import { MatTableDataSource } from '@angular/material';
 
 @Component({
   selector: 'app-add',
@@ -13,12 +10,27 @@ import {
 })
 export class AddComponent implements OnInit {
 
-  laender = LAENDER.slice(1);
+  dataSource;
   centCount = [];
+  combinations: YearCombinationResultSet[];
+  displayedColumns = ['year', 'belgien', 'österreich'];
+  countries;
 
-  constructor() {}
+  constructor() {
+  }
 
-  ngOnInit() {}
+
+  ngOnInit() {
+    this.countries = LAENDER;
+    this.combinations = [
+      {year: 2002,
+       countries: [{country: 'deutschland', combination: 0},
+                   {country: 'belgien', combination: 1},
+                   {country: 'österreich', combination: 3},
+                              ]},
+    ];
+    this.dataSource = new MatTableDataSource(this.combinations);
+  }
 
   addCent(komb: number) {
     if (this.centCount[komb] != null) {
