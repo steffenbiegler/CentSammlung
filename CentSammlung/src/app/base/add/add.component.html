@@ -17,9 +17,9 @@
         <td mat-cell *matCellDef="let year">
 
            <span *ngIf="getCombination(year,country)">
-              <div class='flexContainer'>
-                  <div class='buttonDiv add' (click)='addCent(getCombination(year,country));'>&nbsp;</div>
+              <div class='flexContainer'>                  
                   <div class='buttonDiv remove' (click)='removeCent(getCombination(year,country));'>&nbsp;</div>
+                  <div class='buttonDiv add' (click)='addCent(getCombination(year,country));'>&nbsp;</div>
                   <div class='info'>{{centCount[getCombination(year,country)]}}</div>
               </div>
           </span>
