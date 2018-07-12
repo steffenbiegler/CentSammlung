@@ -1,28 +1,27 @@
 .flexContainer{
   display: flex;
+  align-items: center;
 }
 
+.flexContainer_columns{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 
 .info{
-  position: absolute;
-  text-align: center;
-  z-index: 0;
   padding-left:15px;
 }
 
 .add{
-  flex-grow:4;
-  z-index: 1;
   &:hover{
-    background-color: rgba(0, 255, 0, 0.5);
+    background-color: rgba(51, 214, 86, 0.5);
   }
 }
 
 .remove{
-  flex-grow: 1;
-  cursor: pointer;
   &:hover{
-    background-color: rgba(255, 0, 0, 0.5);
+    background-color: rgba(214, 50, 50, 0.5);
 
   }
 }
@@ -30,9 +29,49 @@
 .buttonDiv{
   text-align: center;
   z-index: 1;
+  width: 15px;
+  height: 15px;
   cursor: pointer;
+  color:#fadcb9;
+  font-weight: bolder;
   &:hover{
     color:white;
     font-weight: bold;
+  }
+}
+
+
+#addCentTable{
+  background: none;
+  margin: 2em;
+}
+
+#addCentTable tr{
+  height: 2.3em;
+  &:hover{
+    background-color: #c4835e;
+  }
+}
+
+#addCentTable td{
+  border-right:solid 1px #684432;
+  color: #684432;
+  text-align: center;
+  padding:0;
+}
+
+#addCentTable th{
+  border-right:solid 1px #684432;
+  text-align: center;
+  padding:0;
+}
+
+.flag{
+  margin: 0.2em;
+  padding: 2px;
+  cursor: pointer;
+  &:hover{
+    padding: 0;
+    border:2px solid #c4835e;
   }
 }
