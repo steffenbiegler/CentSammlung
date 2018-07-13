@@ -11,7 +11,7 @@ export class CentBackendService {
   constructor(private http: HttpClient) { }
 
   isBackendAlive(): boolean {
-    return false;
+    return true;
   }
 
   getYearCombinations(): Observable<any> {

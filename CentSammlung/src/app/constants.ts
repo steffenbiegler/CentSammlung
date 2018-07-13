@@ -1,7 +1,7 @@
 export const LAENDER = [
   'München',
   'Berlin',
-  'Stuttgard',
+  'Stuttgart',
   'Karlsruhe',
   'Hamburg',
   'Andorra',
@@ -123,7 +123,7 @@ export const yearcomb = [{
     combination: 100
   }, {
     country: 'Deutschland',
-    city: 'Stuttgard',
+    city: 'Stuttgart',
     combination: 100
   }, {
     country: 'Frankreich',

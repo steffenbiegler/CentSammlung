@@ -18,7 +18,7 @@ function db_trennen($zeiger){
 
 function getYearCombinationResultSet($pointer){
 	if ($pointer){		
-		$sql = "SELECT Jahr as year, GROUP_CONCAT(CONCAT(land, '|',IDkomb)) as countries FROM `tbl_kombination` LEFT JOIN `tbl_land` USING(IDland) LEFT JOIN `tbl_stadt` USING(IDstadt) Group By `jahr` ASC;";
+		$sql = "SELECT Jahr as year, GROUP_CONCAT(CONCAT(land, '|' ,IDkomb, '|' , IFNULL(stadt_lang, ''))) as countries FROM `tbl_kombination` LEFT JOIN `tbl_land` USING(IDland) LEFT JOIN `tbl_stadt` USING(IDstadt) Group By `jahr` ASC;";
 		$result= mysqli_query($pointer, $sql);	
 		while($row = mysqli_fetch_array($result, MYSQLI_ASSOC))
 		{
@@ -26,7 +26,11 @@ function getYearCombinationResultSet($pointer){
 			$row['countries'] = null;
 			foreach ($combinations as $key => $value) {
 				$combination = explode('|',$value);
-				$row['countries'][] = ['country'=>$combination[0],'combination' =>$combination[1]];
+				if (count($combination) == 3){
+					$row['countries'][] = ['country'=>$combination[0],'combination' =>$combination[1], 'city' => $combination[2]];
+				} else {
+					$row['countries'][] = ['country'=>$combination[0],'combination' =>$combination[1]];
+				}
 			}			
 			$YearCombinationResultSet[]= $row;
 		}	

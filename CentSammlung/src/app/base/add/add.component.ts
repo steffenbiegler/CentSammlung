@@ -15,7 +15,7 @@ export class AddComponent implements OnInit {
   dataSource;
   combinations: YearCombinationResultSet[];
   centCount: number[] = [];
-  displayedColumns = ['year', 'Berlin', 'München', 'Stuttgard', 'Karlsruhe', 'Hamburg'];
+  displayedColumns = ['year', 'Berlin', 'München', 'Stuttgart', 'Karlsruhe', 'Hamburg'];
   countries: string[];
   highlight = '';
 
@@ -27,11 +27,12 @@ export class AddComponent implements OnInit {
     if (this.centService.isBackendAlive()) {
       this.centService.getYearCombinations().subscribe((data: YearCombinationResultSet[]) => {
         this.combinations = data;
+        this.filterCombinationData();
       });
     } else {
       this.combinations = yearcomb;
+      this.filterCombinationData();
     }
-    this.filterCombinationData();
   }
 
 
@@ -84,7 +85,6 @@ export class AddComponent implements OnInit {
   }
 
   filterCombinationData() {
-    console.log(this.displayedColumns);
     const filteredDataSource: YearCombinationResultSet[] = [];
     this.combinations.forEach(
       (year) => {
