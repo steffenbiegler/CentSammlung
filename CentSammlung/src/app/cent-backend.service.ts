@@ -55,4 +55,15 @@ export class CentBackendService {
     return this.http.get(this.baseUrl + 'ranking');
   }
 
+
+  sendInput(centCount: number[]) {
+    centCount.forEach((count, combination) => {
+      console.log(combination);
+      if (count > 0) {
+        console.log('Muss noch senden: CombID:' + combination + ', '  + count + ' Cents' );
+      }
+
+    });
+
+  }
 }

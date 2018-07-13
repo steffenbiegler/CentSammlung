@@ -1,37 +1,43 @@
+<div class="slide-in-left">
+<button mat-raised-button (click)='sendCents()'>Senden</button>
 <div class='flexContainer_columns'>
-  <table mat-table *ngIf='dataSource' [dataSource]="dataSource" id='addCentTable'>
+  <div>
+    <table mat-table *ngIf='dataSource' [dataSource]="dataSource" id='addCentTable' (mouseleave)="setHighlight('none');">
 
-    <ng-container matColumnDef="year">
-      <th mat-header-cell *matHeaderCellDef> Jahr </th>
-      <td mat-cell *matCellDef="let year"> {{year.year}} </td>
-    </ng-container>
+      <ng-container matColumnDef="year">
+        <th mat-header-cell *matHeaderCellDef (mouseover)="setHighlight('none');"> Jahr </th>
+        <td mat-cell *matCellDef="let year" (mouseover)="setHighlight('none');"> {{year.year}} </td>
+      </ng-container>
 
-    <ng-container *ngFor='let country of countries' matColumnDef="{{country}}">
-      <th mat-header-cell *matHeaderCellDef>
-        <img alt='{{country}}' title='{{country}}' src='assets/images/flaggen/{{country}}.gif' />
-      </th>
+      <ng-container *ngFor='let country of countries' matColumnDef="{{country}}">
+        <th mat-header-cell *matHeaderCellDef (mouseover)="setHighlight(country);" [style.background-color]="this.highlight == country ? '#c4835e' : ''">
+          <img alt='{{country}}' title='{{country}}' src='assets/images/flaggen/{{country | lowercase}}.gif' />
+        </th>
 
-      <td mat-cell *matCellDef="let year">
-        <span *ngIf="getCombination(year,country)">
-          <div class='flexContainer'>
-            <div class='info'>{{centCount[getCombination(year,country)]}}</div>
-            <div class='flexContainer_columns'>
-              <div class='buttonDiv add' (click)='addCent(getCombination(year,country));'>&nbsp;+&nbsp;</div>
-              <div class='buttonDiv remove' (click)='removeCent(getCombination(year,country));'>&nbsp;-&nbsp;</div>
+        <td mat-cell *matCellDef="let year" (mouseover)="setHighlight(country);" [style.background-color]="this.highlight == country ? '#c4835e' : ''">
+          <span *ngIf="getCombination(year,country)">
+            <div class='flexContainer'>
+              <div class='info'>{{centCount[getCombination(year,country)]}}</div>
+              <div class='flexContainer_columns'>
+                <div class='buttonDiv add' (click)='addCent(getCombination(year,country));'>&nbsp;+&nbsp;</div>
+                <div class='buttonDiv remove' (click)='removeCent(getCombination(year,country));'>&nbsp;-&nbsp;</div>
+              </div>
             </div>
-          </div>
-        </span>
-      </td>
-    </ng-container>
+          </span>
+        </td>
+      </ng-container>
 
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-  </table>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+
+  </div>
   <div>
     <span *ngFor='let country of countries'>
       <img *ngIf='!displayedColumns.includes(country)' class='flag' (click)="addColumn(country)" alt='{{country}}' title='{{country}}'
-        src='assets/images/flaggen/{{country}}.gif' />
+        src='assets/images/flaggen/{{country | lowercase}}.gif' />
     </span>
   </div>
 
+</div>
 </div>
