@@ -1,9 +1,21 @@
-import {  Component,  OnInit} from '@angular/core';
-import {  YearCombinationResultSet} from '../../resultData/combination-result';
-import {  CentBackendService} from '../../cent-backend.service';
-import {  MatTableDataSource} from '@angular/material';
+import {
+  Component,
+  OnInit
+} from '@angular/core';
+import {
+  YearCombinationResultSet
+} from '../../resultData/combination-result';
+import {
+  CentBackendService
+} from '../../cent-backend.service';
+import {
+  MatTableDataSource
+} from '@angular/material';
 
-import {  LAENDER, yearcomb} from '../../constants';
+import {
+  LAENDER
+} from '../../constants';
+import { stringify } from 'querystring';
 
 @Component({
   selector: 'app-add',
@@ -13,21 +25,23 @@ import {  LAENDER, yearcomb} from '../../constants';
 export class AddComponent implements OnInit {
 
   dataSource;
+  total = 0;
   combinations: YearCombinationResultSet[];
   centCount: number[] = [];
   displayedColumns = ['year', 'Berlin', 'München', 'Stuttgart', 'Karlsruhe', 'Hamburg'];
   countries: string[];
   highlight = '';
+  history: String[] = [];
 
   constructor(private centService: CentBackendService) {
     this.countries = LAENDER;
   }
 
   ngOnInit() {
-      this.centService.getYearCombinations().subscribe((data: YearCombinationResultSet[]) => {
-        this.combinations = data;
-        this.filterCombinationData();
-      });
+    this.centService.getYearCombinations().subscribe((data: YearCombinationResultSet[]) => {
+      this.combinations = data;
+      this.filterCombinationData();
+    });
 
   }
 
@@ -38,19 +52,25 @@ export class AddComponent implements OnInit {
   sendCents() {
     this.centService.addCentCount(this.centCount);
     this.centCount = [];
+    this.total = 0;
+    this.history = [];
   }
 
-  addCent(komb: number) {
+  addCent(komb: number, year: number, country: string) {
     if (this.centCount[komb] != null) {
       this.centCount[komb]++;
     } else {
       this.centCount[komb] = 1;
     }
+    this.total++;
+    this.history.push('+++  ' + country + ' ' + year);
   }
 
-  removeCent(komb: number) {
+  removeCent(komb: number, year: number, country: string) {
     if (this.centCount[komb] != null && this.centCount[komb] > 0) {
       this.centCount[komb]--;
+      this.total--;
+      this.history.push('--- ' + country + ' ' + year);
     } else {
       this.centCount[komb] = 0;
     }
@@ -63,11 +83,11 @@ export class AddComponent implements OnInit {
 
   getCombination(year: YearCombinationResultSet, country: string) {
     const result = year.countries.filter((entry) => {
-     if (entry.country.toLowerCase() === country.toLowerCase()) {
-      return true;
-     } else if (entry.city && entry.city.toLowerCase() === country.toLowerCase()) {
-      return true;
-     }
+      if (entry.country.toLowerCase() === country.toLowerCase()) {
+        return true;
+      } else if (entry.city && entry.city.toLowerCase() === country.toLowerCase()) {
+        return true;
+      }
     })[0];
     if (result) {
       if (!this.centCount[result.combination]) {
@@ -91,7 +111,9 @@ export class AddComponent implements OnInit {
             validConfig = true;
           }
         });
-        if (validConfig) { filteredDataSource.push(year); }
+        if (validConfig) {
+          filteredDataSource.push(year);
+        }
       }
     );
     this.dataSource = new MatTableDataSource(filteredDataSource);
