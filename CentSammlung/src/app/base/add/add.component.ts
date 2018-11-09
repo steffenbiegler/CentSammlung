@@ -24,24 +24,19 @@ export class AddComponent implements OnInit {
   }
 
   ngOnInit() {
-    if (this.centService.isBackendAlive()) {
       this.centService.getYearCombinations().subscribe((data: YearCombinationResultSet[]) => {
         this.combinations = data;
         this.filterCombinationData();
       });
-    } else {
-      this.combinations = yearcomb;
-      this.filterCombinationData();
-    }
-  }
 
+  }
 
   setHighlight(country) {
     this.highlight = country;
   }
 
   sendCents() {
-    this.centService.sendInput(this.centCount);
+    this.centService.addCentCount(this.centCount);
     this.centCount = [];
   }
 
@@ -101,6 +96,5 @@ export class AddComponent implements OnInit {
     );
     this.dataSource = new MatTableDataSource(filteredDataSource);
   }
-
 
 }

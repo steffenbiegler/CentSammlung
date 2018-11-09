@@ -1,6 +1,13 @@
-import { Component, OnInit } from '@angular/core';
-import { CentBackendService } from '../cent-backend.service';
-import { CentAmountResult } from './../resultData/cent-amount-result';
+import {
+  Component,
+  OnInit
+} from '@angular/core';
+import {
+  CentBackendService
+} from '../cent-backend.service';
+import {
+  CentAmountResult
+} from './../resultData/cent-amount-result';
 
 @Component({
   selector: 'app-counter',
@@ -10,17 +17,38 @@ import { CentAmountResult } from './../resultData/cent-amount-result';
 
 export class CounterComponent implements OnInit {
 
-  centCount: CentAmountResult =  {count: 12345, digits : ['1', '2', '3', '4', '5'], date: new Date('2018-01-01')};
+  loading = true;
+  centCount: CentAmountResult;
+  date;
+  digits;
+  count;
 
-  constructor(private centService: CentBackendService) { }
+  constructor(private centService: CentBackendService) {}
 
   ngOnInit() {
-    if (this.centService.isBackendAlive()) {
-    this.centService.getCount().subscribe((data: CentAmountResult) => {
-        this.centCount = data;
-      });
-    }
+    this.loadCouterdata();
   }
 
+  digitizeCount() {
+    if (this.centCount != null) {
+      this.centCount.digits = [];
+      const sNumber = this.centCount.count.toString();
+      for (let i = 0, len = sNumber.length; i < len; i += 1) {
+        this.centCount.digits.push(sNumber.charAt(i));
+      }
+    }
+    return this;
+  }
+
+  loadCouterdata() {
+    if (this.centService.isBackendAlive()) {
+      this.centService.getCount().subscribe((data: CentAmountResult) => {
+        this.centCount = data;
+        this.digitizeCount();
+        this.loading = false;
+      });
+    }
+
+  }
 
 }

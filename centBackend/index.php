@@ -1,18 +1,17 @@
 <?php
     header('Content-Type: application/json; charset=utf-8'); 
     header('Cache-Control: must-revalidate, pre-check=0, no-store, no-cache, max-age=0, post-check=0');
-    header('Access-Control-Allow-Origin: *');  
+    header('Access-Control-Allow-Origin: *');
     
     include_once( "./inc/init.inc.php");
+    
 
     $zeiger = db_verbinden();
     
     switch ($request) {
         case 'comb_year':
             echo json_encode(getYearCombinationResultSet($zeiger));
-            break;           
-     
-     
+            break;
         case 'countries':
             echo json_encode(db_laender($zeiger));
             break;        
@@ -39,6 +38,12 @@
             break;
         case 'ranking':
             echo json_encode(db_ranking($zeiger, '40'));
+            break;
+
+        case 'add':
+            $anzahl = post_get_session_pruefen("count");
+            $idkomb = post_get_session_pruefen("combination");
+            echo json_encode(db_cent_hinzufuegen($zeiger, $anzahl, $idkomb));
             break;
         default:
         $return = "Cent-Backend antwortet";

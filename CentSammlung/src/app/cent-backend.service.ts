@@ -1,6 +1,16 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import {
+  Injectable
+} from '@angular/core';
+import {
+  HttpClient,
+  HttpParams
+} from '@angular/common/http';
+import {
+  Observable
+} from 'rxjs';
+import {
+  post
+} from 'selenium-webdriver/http';
 
 @Injectable({
   providedIn: 'root'
@@ -8,62 +18,66 @@ import { Observable } from 'rxjs';
 export class CentBackendService {
   private baseUrl = 'http://127.0.0.1:80/centBackend/?request=';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   isBackendAlive(): boolean {
     return true;
   }
 
-  getYearCombinations(): Observable<any> {
+  getYearCombinations(): Observable < any > {
     return this.http.get(this.baseUrl + '  comb_year');
-   }
-   // --------------------------------------- Refinement done
+  }
 
-  getCombinations(): Observable<any> {
+  getCombinations(): Observable < any > {
     return this.http.get(this.baseUrl + 'combinations');
   }
 
-  getCountries(): Observable<any> {
+  getCountries(): Observable < any > {
     return this.http.get(this.baseUrl + 'countries');
   }
 
-  getCitys(): Observable<any> {
+  getCitys(): Observable < any > {
     return this.http.get(this.baseUrl + 'cities');
   }
 
-  getCount(): Observable<any> {
+  getCount(): Observable < any > {
     return this.http.get(this.baseUrl + 'count');
   }
 
-  getYearCount(): Observable<any> {
+  getYearCount(): Observable < any > {
     return this.http.get(this.baseUrl + 'count_year');
   }
 
-  getGermanCityCount(): Observable<any> {
+  getGermanCityCount(): Observable < any > {
     return this.http.get(this.baseUrl + 'count_city');
   }
 
-  getEuropeanCount(): Observable<any> {
+  getEuropeanCount(): Observable < any > {
     return this.http.get(this.baseUrl + 'count_country');
   }
 
-  getMonthlyGrow(): Observable<any> {
+  getMonthlyGrow(): Observable < any > {
     return this.http.get(this.baseUrl + 'grow');
   }
 
-  getRanking(): Observable<any> {
+  getRanking(): Observable < any > {
     return this.http.get(this.baseUrl + 'ranking');
   }
 
 
-  sendInput(centCount: number[]) {
+  addCentCount(centCount: number[]) {
     centCount.forEach((count, combination) => {
-      console.log(combination);
       if (count > 0) {
-        console.log('Muss noch senden: CombID:' + combination + ', '  + count + ' Cents' );
+        console.log('Muss noch senden: CombID:' + combination + ', ' + count + ' Cents');
+        this.addCents(combination.toString(), count.toString()).subscribe(
+          (data) => console.log(data + 'count ' + count  + ' combination ' + combination)
+        );
       }
-
     });
+  }
 
+  addCents(combination: String, count: String): Observable < any > {
+    const params = '&count=' + count + '&combination=' + combination;
+    return this.http.get(this.baseUrl + 'add' + params);
   }
 }

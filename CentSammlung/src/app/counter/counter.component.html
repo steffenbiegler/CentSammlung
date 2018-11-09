@@ -1,7 +1,9 @@
-<div *ngIf='centCount' id='counterblock'>
-  <span class='counter'>0</span>
-  <span class='counter' *ngFor="let digit of centCount.digits">{{digit}}</span>
-</div>
-<div id="stand">
-  Stand: {{centCount.date | date:'dd.MM.yyyy' }}
-</div>
+<div *ngIf='!loading'>
+  <div id='counterblock'>
+    <span class='counter'>0</span>    
+    <span class='counter' *ngFor="let digit of centCount.digits">{{digit}}</span>
+  </div>
+  <div id="stand">
+    Stand: {{ centCount.date | date:'dd.MM.yyyy' }}
+  </div>
+</div> 

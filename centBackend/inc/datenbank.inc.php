@@ -213,7 +213,7 @@ function db_staedte($zeiger){
 function db_cents_gesamt($zeiger, $datum = ""){	
 	if ($zeiger){
 		if ($datum == "") $datum = date("Y-m-d H:i:s");
-		$sql = 'SELECT SUM(`anzahl`) AS gesamt, MAX(`datum`) AS datum FROM `tbl_cent` where `datum` <= \''.$datum.'\'';		
+		$sql = 'SELECT SUM(`anzahl`) AS count, MAX(`datum`) AS date FROM `tbl_cent` where `datum` <= \''.$datum.'\'';		
 		$result= mysqli_query($zeiger, $sql);	
 		return  mysqli_fetch_array($result, MYSQLI_ASSOC);
 	}	
