@@ -15,7 +15,9 @@ import {
 import {
   LAENDER
 } from '../../constants';
-import { stringify } from 'querystring';
+import {
+  stringify
+} from 'querystring';
 
 @Component({
   selector: 'app-add',
@@ -32,6 +34,7 @@ export class AddComponent implements OnInit {
   countries: string[];
   highlight = '';
   history: String[] = [];
+  history_max_length = 20;
 
   constructor(private centService: CentBackendService) {
     this.countries = LAENDER;
@@ -63,14 +66,14 @@ export class AddComponent implements OnInit {
       this.centCount[komb] = 1;
     }
     this.total++;
-    this.history.push('+++  ' + country + ' ' + year);
+    this.history.push('inc  ' + country + ' ' + year);
   }
 
   removeCent(komb: number, year: number, country: string) {
     if (this.centCount[komb] != null && this.centCount[komb] > 0) {
       this.centCount[komb]--;
       this.total--;
-      this.history.push('--- ' + country + ' ' + year);
+      this.history.push('dec ' + country + ' ' + year);
     } else {
       this.centCount[komb] = 0;
     }

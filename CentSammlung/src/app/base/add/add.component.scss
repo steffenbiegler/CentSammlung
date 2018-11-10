@@ -9,16 +9,27 @@
 .flexContainer{
   display: flex;
   align-items: center;
+  justify-content: center;
 }
 
 .flexContainer_columns{
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  flex-direction: column;    
+}
+
+#outer_flexContainer_columns{  
+  align-items: center;  
+}
+
+.flex_item{
+  min-width: 50%;  
+  text-align: center;
 }
 
 .info{
-  padding-left:15px;
+  text-align: center;
+  padding-left:1em;  
+  padding-right:0.2em;  
 }
 
 .add{
@@ -30,23 +41,38 @@
 .remove{
   &:hover{
     background-color: rgba(214, 50, 50, 0.5);
-
   }
 }
 
 
-button{
-  position: absolute;
+button{  
   border-radius: 20%;
-  width:150px;
-  height: 150px;
+  width: 100px;
+  height: 100px;
   color:#fadcb9;
   background-color:  #684432;
-  margin:41px;
-  font-size: 2em;
+  padding: 0px;
+  font-size: 1.5em;
   &:hover{
     background-color: #c4835e;
   }
+}
+
+#send{
+  position: absolute;
+  margin:30px;  
+  text-align: center;
+}
+
+#history_list{
+  position: absolute;
+  margin-top: 150px;
+  margin-left: 30px;  
+}
+
+
+.dec{
+  color: orangered;
 }
 
 .buttonDiv{
@@ -67,6 +93,7 @@ button{
 #addCentTable{
   background: none;
   margin: 2em;
+  min-width: 80%;
 }
 
 #addCentTable tr{
@@ -99,4 +126,3 @@ button{
     border:2px solid #c4835e;
   }
 }
-

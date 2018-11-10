@@ -1,7 +1,16 @@
 <div class="slide-in-left">
-  <button mat-raised-button (click)='sendCents()'>Senden</button>
-  <div class='flexContainer_columns'>
-    <div>
+  <div id='send'>
+    <button mat-raised-button (click)='sendCents()'>Senden</button>
+    <br/>
+    <span>Total: {{total}}</span>
+  </div>
+
+  <div id='history_list'>        
+      <span *ngFor='let entry of history.slice(-history_max_length).reverse()' class="{{entry|slice:0:3}}"><br/>{{entry|slice:3}}</span>    
+  </div>
+
+  <div class='flexContainer_columns' id='outer_flexContainer_columns'>
+    <div class='flex_item'>
       <table mat-table *ngIf='dataSource' [dataSource]="dataSource" id='addCentTable' (mouseleave)="setHighlight('none');">
 
         <ng-container matColumnDef="year">
@@ -22,7 +31,7 @@
                   <div class='buttonDiv add' (click)='addCent(getCombination(year,country), year.year, country);'>&nbsp;+&nbsp;</div>
                   <div class='buttonDiv remove' (click)='removeCent(getCombination(year,country), year.year, country);'>&nbsp;-&nbsp;</div>
                 </div>
-              </div>
+              </div>              
             </span>
           </td>
         </ng-container>
@@ -31,16 +40,10 @@
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
       </table>      
   </div>  
-  Total: {{total}}
-  <div>
+  <div class='flex_item'>
     <span *ngFor='let country of countries'>
       <img *ngIf='!displayedColumns.includes(country)' class='flag' (click)="addColumn(country)" alt='{{country}}' title='{{country}}'
         src='assets/images/flaggen/{{country | lowercase}}.gif' />
     </span>
-  </div>    
-  <div>
-      <ul>
-        <li *ngFor='let entry of history.slice(-5).reverse()'>{{entry}}</li>
-      </ul>
-    </div>
+  </div>  
 </div>
