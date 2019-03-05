@@ -25,7 +25,7 @@ export class CentBackendService {
   }
 
   getYearCombinations(): Observable < any > {
-    return this.http.get(this.baseUrl + '  comb_year');
+    return this.http.get(this.baseUrl + 'comb_year');
   }
 
   getCombinations(): Observable < any > {
@@ -64,20 +64,22 @@ export class CentBackendService {
     return this.http.get(this.baseUrl + 'ranking');
   }
 
+  getHistory(year: string, month: string): Observable < any > {
+    const params = '&jahr=' + year + '&monat=' + month;
+    return this.http.get(this.baseUrl + 'history' + params);
+  }
 
   addCentCount(centCount: number[]) {
     centCount.forEach((count, combination) => {
       if (count > 0) {
-        console.log('Muss noch senden: CombID:' + combination + ', ' + count + ' Cents');
-        this.addCents(combination.toString(), count.toString()).subscribe(
-          (data) => console.log(data + 'count ' + count  + ' combination ' + combination)
-        );
+        const params = '&count=' + count + '&combination=' + combination;
+        this.http.get(this.baseUrl + 'add' + params).subscribe();
       }
     });
   }
 
-  addCents(combination: String, count: String): Observable < any > {
-    const params = '&count=' + count + '&combination=' + combination;
-    return this.http.get(this.baseUrl + 'add' + params);
+  deleteCent(id: number) {
+    const params = '&id=' + id;
+    this.http.get(this.baseUrl + 'deleteCent' + params).subscribe();
   }
 }

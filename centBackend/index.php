@@ -39,7 +39,15 @@
         case 'ranking':
             echo json_encode(db_ranking($zeiger, '40'));
             break;
-
+        case 'history':
+            $jahr = post_get_session_pruefen("jahr");    
+            $monat = post_get_session_pruefen("monat");            
+            echo json_encode(db_history($zeiger,$jahr,$monat));
+            break;
+        case 'deleteCent':
+            $id = post_get_session_pruefen("id");
+            echo json_encode(db_delete_cent($zeiger,$id));
+            break;
         case 'add':
             $anzahl = post_get_session_pruefen("count");
             $idkomb = post_get_session_pruefen("combination");

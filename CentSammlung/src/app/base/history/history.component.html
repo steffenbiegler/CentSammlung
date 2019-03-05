@@ -1,3 +1,37 @@
-<p>
-  history works!
-</p>
+<table mat-table *ngIf='historicData' [dataSource]="historicData" id='historyTable'>
+
+  <ng-container matColumnDef="anzahl">
+    <th mat-header-cell *matHeaderCellDef > Anzahl </th>
+    <td mat-cell *matCellDef="let data"> {{data.anzahl}} &nbsp;</td>
+  </ng-container>
+  <ng-container matColumnDef="jahr">
+    <th mat-header-cell *matHeaderCellDef > Jahr </th>
+    <td mat-cell *matCellDef="let data"> {{data.jahr}} &nbsp;</td>
+  </ng-container>
+
+  <ng-container matColumnDef="land">
+    <th mat-header-cell *matHeaderCellDef > Land </th>
+    <td mat-cell *matCellDef="let data"> {{data.land}} &nbsp;</td>
+  </ng-container>
+
+  <ng-container matColumnDef="stadt">
+    <th mat-header-cell *matHeaderCellDef > Stadt </th>
+    <td mat-cell *matCellDef="let data"> <span *ngIf='data.stadt_lang'> {{data.stadt_lang}} ({{data.stadt_kurz}}) </span> </td>
+  </ng-container>
+
+  <ng-container matColumnDef="datum">
+    <th mat-header-cell *matHeaderCellDef > Datum </th>
+    <td mat-cell *matCellDef="let data"> {{data.datum | date:'dd.MM.yyyy HH:mm'}} &nbsp;</td>
+  </ng-container>
+
+  <ng-container matColumnDef="action">
+    <th mat-header-cell *matHeaderCellDef > Aktionen </th>
+    <td mat-cell *matCellDef="let data"> <mat-icon (click)="deleteEntry(data.ID)"> delete_forever </mat-icon> </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+</table>      
+
+<mat-spinner id='loadingSpinner' *ngIf='!historicData'></mat-spinner>

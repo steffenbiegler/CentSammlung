@@ -1,0 +1,43 @@
+#historyTable{
+    background: none;
+    margin: 2em;
+    min-width: 60%;
+  }
+
+  #historyTable{
+    background: none;
+    margin: 2em;
+  }
+  
+  #historyTable tr{
+    height: 2.3em;
+    &:hover{
+      background-color: #c4835e;
+    }
+  }
+  
+  #historyTable td{
+    color: #684432;
+    text-align: center;
+    padding:0;
+  }
+  
+  
+  #historyTable th{
+    text-align: center;
+    padding:0;
+  }
+
+  #historyTable mat-icon{
+      cursor: pointer;
+      &:hover{
+          color:white;
+      }
+  }
+
+  #loadingSpinner{     
+      position: absolute;
+      top:40%;
+      left: 40%;
+  }
+

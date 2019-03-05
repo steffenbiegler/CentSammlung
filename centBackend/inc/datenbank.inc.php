@@ -38,8 +38,20 @@ function getYearCombinationResultSet($pointer){
 	}		
 }
 
-
-/* ab hier alte funktionen */
+function db_history($zeiger, $jahr = "", $monat = ""){
+	if ($zeiger){
+		$a_history = null;
+		if ($jahr == "" && $monat == "") $sql = 'SELECT `tbl_cent`.IDCent as ID, anzahl , land , jahr , stadt_lang , stadt_kurz, datum  FROM `tbl_cent` LEFT JOIN `tbl_kombination` USING(`IDkomb`) LEFT JOIN tbl_land USING(`IDland`) LEFT JOIN tbl_stadt USING(`IDstadt`) ORDER BY `datum` DESC'; 
+		else if ($monat == "") $sql = 'SELECT `tbl_cent`.IDCent as ID, anzahl , land , jahr , stadt_lang , stadt_kurz, datum  FROM `tbl_cent` LEFT JOIN `tbl_kombination` USING(`IDkomb`) LEFT JOIN tbl_land USING(`IDland`) LEFT JOIN tbl_stadt USING(`IDstadt`) where YEAR(`datum`) = '.$jahr.' ORDER BY `datum`'; 
+		else $sql = 'SELECT `tbl_cent`.IDCent as ID, anzahl , land , jahr , stadt_lang , stadt_kurz, datum  FROM `tbl_cent` LEFT JOIN `tbl_kombination` USING(`IDkomb`) LEFT JOIN tbl_land USING(`IDland`) LEFT JOIN tbl_stadt USING(`IDstadt`) where YEAR(`datum`) = '.$jahr.' AND MONTH(`datum`) = '.$monat.' ORDER BY `datum` DESC';		
+		$result= mysqli_query($zeiger, $sql);
+		while($row = mysqli_fetch_array($result, MYSQLI_ASSOC))
+			{
+				$a_history[]= $row;
+			}
+		return $a_history;
+	}
+}
 
 
 function db_cent_hinzufuegen($zeiger, $anzahl, $idkomb, $datum =""){	
@@ -50,6 +62,18 @@ function db_cent_hinzufuegen($zeiger, $anzahl, $idkomb, $datum =""){
 		$result= mysqli_query($zeiger, $sql);	
 	}
 }
+
+function db_delete_cent($zeiger, $id){
+	if ($zeiger){
+		$sql = 'DELETE FROM `tbl_cent` WHERE `tbl_cent`.`IDCent` ='.$id; 
+		$result= mysqli_query($zeiger, $sql);
+	}	
+}
+
+
+/* ab hier alte funktionen */
+
+
 
 function db_kombinationen($zeiger, $landid = "", $jahr ="", $stadtid = "" ){	
 	if ($zeiger){
@@ -327,21 +351,6 @@ function db_staettesummen($zeiger)
 	}
 }
 
-
-function db_history($zeiger, $jahr = "", $monat = ""){
-	if ($zeiger){
-		$a_history = null;
-		if ($jahr == "" && $monat == "") 	$sql = 'SELECT anzahl , land , jahr , stadt_lang , stadt_kurz, datum as heute FROM `tbl_cent` LEFT JOIN `tbl_kombination` USING(`IDkomb`) LEFT JOIN tbl_land USING(`IDland`) LEFT JOIN tbl_stadt USING(`IDstadt`) ORDER BY `datum` DESC'; 
-		else if ($monat == "") $sql = 'SELECT anzahl , land , jahr , stadt_lang , stadt_kurz, datum as heute, FROM `tbl_cent` LEFT JOIN `tbl_kombination` USING(`IDkomb`) LEFT JOIN tbl_land USING(`IDland`) LEFT JOIN tbl_stadt USING(`IDstadt`) where YEAR(`datum`) = '.$jahr.' ORDER BY `datum`'; 
-		else $sql = 'SELECT anzahl , land , jahr , stadt_lang , stadt_kurz, datum as heute FROM `tbl_cent` LEFT JOIN `tbl_kombination` USING(`IDkomb`) LEFT JOIN tbl_land USING(`IDland`) LEFT JOIN tbl_stadt USING(`IDstadt`) where YEAR(`datum`) = '.$jahr.' AND MONTH(`datum`) = '.$monat.' ORDER BY `datum` DESC';		
-		$result= mysqli_query($zeiger, $sql);
-		while($row = mysqli_fetch_array($result, MYSQLI_ASSOC))
-			{
-				$a_history[]= $row;
-			}
-		return $a_history;
-	}
-}
 
 
 function db_monat($zeiger, $sort='DESC'){	

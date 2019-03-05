@@ -15,9 +15,6 @@ import {
 import {
   LAENDER
 } from '../../constants';
-import {
-  stringify
-} from 'querystring';
 
 @Component({
   selector: 'app-add',
