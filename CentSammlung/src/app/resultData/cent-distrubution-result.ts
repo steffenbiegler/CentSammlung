@@ -1,15 +1,15 @@
 export class CentDistrubutionResultSet {
-  year: number;
+  jahr: number;
   countries: CoutryDetails[];
-  count: number;
+  anzahl: number;
   percentage: string;
 
   getValue() {
-    return this.count;
+    return this.anzahl.valueOf();
   }
 
   getLabel() {
-    return this.year.toString();
+    return this.jahr.toString();
   }
 }
 
@@ -17,12 +17,12 @@ export class CentDistrubutionResultSet {
 class CoutryDetails {
     country: string;
     cities?: CityDetails[];
-    count: number;
+    anzahl: number;
     percentage: string;
     percentage_from_year: string;
 
     getValue() {
-      return this.count;
+      return this.anzahl.valueOf();
     }
 
     getLabel() {

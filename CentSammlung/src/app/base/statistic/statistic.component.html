@@ -1,15 +1,40 @@
 <mat-tab-group dynamicHeight>
   <mat-tab label="Jahre">
-     jahre
-  </mat-tab>
-  <mat-tab label="Europa">
     <ng-template matTabContent>
-      EU
+        <div class="flexContainer">
+            <div class="chart">
+              <igx-pie-chart *ngIf='data' [dataSource]="data" width="600px" height="600px" labelMemberPath="jahr"
+                legendLabelMemberPath="jahr" valueMemberPath="anzahl" othersCategoryThreshold="1" [legend]="legend123">
+              </igx-pie-chart>
+            </div>
+            <div class="legend">
+              <igx-item-legend #legend123 height="100px" width="100px">
+              </igx-item-legend>
+            </div>
+          </div>
+      <table mat-table *ngIf='data' [dataSource]="data" id='yearData'>
+        <ng-container matColumnDef="anzahl">
+          <th mat-header-cell *matHeaderCellDef> Anzahl </th>
+          <td mat-cell *matCellDef="let data"> {{data.anzahl}} &nbsp;</td>
+        </ng-container>
+        <ng-container matColumnDef="jahr">
+          <th mat-header-cell *matHeaderCellDef> Jahr </th>
+          <td mat-cell *matCellDef="let data"> {{data.jahr}} &nbsp;</td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+ 
     </ng-template>
   </mat-tab>
   <mat-tab label="Deutschland">
     <ng-template matTabContent>
       SCHLAAAAND!
+    </ng-template>
+  </mat-tab>
+  <mat-tab label="Europa">
+    <ng-template matTabContent>
+      EU
     </ng-template>
   </mat-tab>
 </mat-tab-group>

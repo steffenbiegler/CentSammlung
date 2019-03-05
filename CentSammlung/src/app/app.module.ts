@@ -21,9 +21,9 @@ import { CombinationComponent } from './base/combination/combination.component';
 import { HistoryComponent } from './base/history/history.component';
 import { NavigationComponent } from './base/navigation/navigation.component';
 import { CounterComponent } from './counter/counter.component';
-import { BarChartComponent } from './diagramms/bar-chart/bar-chart.component';
-import { BubbleChartComponent } from './diagramms/bubble-chart/bubble-chart.component';
-import { PieChartComponent } from './diagramms/pie-chart/pie-chart.component';
+
+import { IgxPieChartModule } from 'igniteui-angular-charts/ES5/igx-pie-chart-module';
+import { IgxItemLegendModule } from 'igniteui-angular-charts/ES5/igx-item-legend-module';
 
 const appRoutes: Routes = [  {path: '', component: BaseComponent, children: [{ path: '', component: StartComponent}]},
                              {path: 'add', component: BaseComponent, children: [{ path: '', component: AddComponent}]},
@@ -46,10 +46,7 @@ const appRoutes: Routes = [  {path: '', component: BaseComponent, children: [{ p
     StartComponent,
     BaseComponent,
     NavigationComponent,
-    CounterComponent,
-    BarChartComponent,
-    BubbleChartComponent,
-    PieChartComponent,
+    CounterComponent
   ],
   imports: [
     BrowserModule,
@@ -58,6 +55,8 @@ const appRoutes: Routes = [  {path: '', component: BaseComponent, children: [{ p
     MaterialModule,
     FormsModule,
     ReactiveFormsModule,
+    IgxPieChartModule,
+    IgxItemLegendModule,
     RouterModule.forRoot(appRoutes)
   ],
   providers: [],

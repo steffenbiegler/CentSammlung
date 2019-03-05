@@ -1,0 +1,31 @@
+#yearData{
+    background: none;
+    margin: 2em;
+  }
+
+  #yearData{
+    background: none;    
+  }
+  
+  #yearData tr{
+    height: 1.5em;
+    &:hover{
+      background-color: #c4835e;
+    }
+  }
+  
+  #yearData td{
+    color: #684432;
+    text-align: center;
+    padding:0.5em;
+  }
+  
+  
+  #yearData th{
+    text-align: center;
+    padding:0.5em;
+  }
+
+  .flexContainer{
+      display:flex;
+  }

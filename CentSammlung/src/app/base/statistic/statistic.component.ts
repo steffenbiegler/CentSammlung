@@ -18,6 +18,7 @@ import {
 
 
 export class StatisticComponent implements OnInit {
+  displayedColumns = ['jahr', 'anzahl'];
   data: CentDistrubutionResultSet[];
   constructor(private centService: CentBackendService) {}
 
@@ -25,7 +26,14 @@ export class StatisticComponent implements OnInit {
     if (this.centService.isBackendAlive()) {
       this.centService.getYearCount().subscribe((data: CentDistrubutionResultSet[]) => {
         this.data = data;
+
+        this.data.forEach(element => {
+          element.anzahl = parseInt(element.anzahl.toString(), 10);
+        });
+
+
       });
+
     }
   }
 }
